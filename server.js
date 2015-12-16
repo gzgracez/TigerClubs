@@ -12,7 +12,7 @@ app.use("/static", express.static('static'));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', {title: 'home'});
 });
 
 app.get('/users',function(req,res) {
