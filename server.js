@@ -16,7 +16,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/users',function(req,res) {
-
+	var users = fs.readFileSync('data/users.json', 'utf8');
+	res.send(users);
 });
 
 app.post('/register',function(req,res) {
@@ -28,7 +29,11 @@ app.post('/login',function(req,res) {
 });
 
 app.get('/users/:id',function(req,res) {
-
+	var userId = req.params.id;
+	var users = fs.readFileSync('data/users.json', 'utf8');
+	JSON.parse(users);
+	var u = users[userID]
+	res.send(JSON.stringify(u));
 });
 
 app.put('/users/:id',function(req,res) {
