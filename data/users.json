@@ -1,0 +1,27 @@
+[
+	{
+	"id":0,
+	"userType":"student",
+	"username":"sterrr",
+	"password":"password",
+	"firstname":"Alastair",
+	"lastname":"Beeson",
+	"email":"alastair.beeson16@trinityschoolnyc.org",
+	"clubs_member":[],
+	"clubs_leader":[0]
+
+	}
+	{
+	"id":1,
+	"userType":"advisor",
+	"username":"defaultAdvisor",
+	"password":"password",
+	"firstname":"Mr",
+	"lastname":"Teacher",
+	"email":"mr.teacher@trinityschoolnyc.org",
+	"clubs_member":[],
+	"clubs_leader":[0]
+
+	}
+
+]

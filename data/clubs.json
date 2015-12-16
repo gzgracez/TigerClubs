@@ -1,0 +1,13 @@
+[
+	{
+	"id":0,
+	"clubname":"Club",
+	"description":"A club",
+	"advisorID":[1],
+	"leaders":[0],
+	"requests":[],
+	"announcements":[],
+	"events":[],
+	"link":[]
+	}
+]
