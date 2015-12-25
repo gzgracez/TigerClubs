@@ -12,15 +12,15 @@ app.use("/static", express.static('static'));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-  res.render('index', {title: 'home'});
+  res.render('index', {title: 'Tiger Clubs Home'});
 });
 
 app.get('/dashboard', function (req, res) {
-  res.render('dashboard', {title: 'dashboard'});
+  res.render('dashboard', {title: 'My Dashboard'});
 });
 
 app.get('/myaccount', function (req, res) {
-  res.render('myaccount', {title: 'myaccount'});
+  res.render('myaccount', {title: 'My Account'});
 });
 
 app.get('/users',function(req,res) {
@@ -53,7 +53,7 @@ app.delete('/users/:id',function(req,res) {
 });
 
 app.get('/clubs',function(req,res) {
-  res.render('clubs', {title: 'clubs'});
+  res.render('clubs', {title: 'My Clubs'});
 });
 
 app.post('/clubs',function(req,res) {
