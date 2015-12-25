@@ -83,7 +83,29 @@ td {
 .container {
     height: 80%
 }
-.icon-bar {
-    background-color: #000084
+
+.navbar-default .navbar-toggle {
+    border-color: #729de1;
 }
+
+.navbar-default .navbar-toggle:focus,.navbar-default .navbar-toggle:hover {
+    background-color: #d1efff;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color:#000;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color:#777;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
+    color: #000;
+}
+
+.navbar-default .navbar-nav>.active>a:hover {
+    color: #777;
+}
+
 /*# sourceMappingURL=styles2.css.map */
