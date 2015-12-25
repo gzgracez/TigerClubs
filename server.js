@@ -15,6 +15,14 @@ app.get('/', function (req, res) {
   res.render('index', {title: 'home'});
 });
 
+app.get('/dashboard', function (req, res) {
+  res.render('dashboard', {title: 'dashboard'});
+});
+
+app.get('/myaccount', function (req, res) {
+  res.render('myaccount', {title: 'myaccount'});
+});
+
 app.get('/users',function(req,res) {
 	var users = fs.readFileSync('data/users.json', 'utf8');
 	res.send(users);
@@ -45,7 +53,7 @@ app.delete('/users/:id',function(req,res) {
 });
 
 app.get('/clubs',function(req,res) {
-
+  res.render('clubs', {title: 'clubs'});
 });
 
 app.post('/clubs',function(req,res) {
