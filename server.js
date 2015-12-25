@@ -28,8 +28,12 @@ app.get('/users',function(req,res) {
 	res.send(users);
 });
 
-app.post('/register',function(req,res) {
+app.get('/register',function(req,res) {
+  res.render('register', {title: 'Register'});
+});
 
+app.post('/register',function(req,res) {
+  
 });
 
 app.post('/login',function(req,res) {

@@ -1,0 +1,24 @@
+  <% include header %>
+  
+  <h1>Register</h1>
+ <div class="container">
+ <form method="post" action="/register">
+    <label for="email">Email:</label>
+  <input type="text" name="rUser[email]" value="" placeholder="Email" class="form-control" required><br>
+
+  <label for="firstName">First Name:</label>
+  <input type="text" name="rUser[firstName]" value="" placeholder="FirstName" class="form-control"><br>
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" name="rUser[lastName]" value="" placeholder="LastName" class="form-control"><br>
+
+  <label for="rUsername">Username:</label>
+  <input type="text" name="rUser[username]" value="" placeholder="Username" class="form-control"><br>
+
+  <label for="password">Password:</label>
+  <input type="password" name="rUser[password]" value="" placeholder="Password" class="form-control"><br>
+
+  <input class="btn btn-primary" class="form-control" type="submit" value="Register"><br><br>
+</form>
+</div>
+<% include footer %>
