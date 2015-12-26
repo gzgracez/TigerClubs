@@ -1,18 +1,31 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var fs = require('fs');
 var path = require('path');
 var path = require('ejs');
+var flash = require('express-flash');
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({secret: 'tigerClubsYay'}));
+app.use(flash());
 var content = fs.readFileSync("static/index.html", 'utf8');
 app.use("/static", express.static('static'));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-  res.render('index', {title: 'Tiger Clubs Home'});
+  if (req.query.newUser) {
+    res.render('index', {title: 'Tiger Clubs Home', newUser: true});
+    console.log("new");
+  }
+  else {
+    res.render('index', {title: 'Tiger Clubs Home'});
+    console.log("no new users");
+  }
 });
 
 app.get('/dashboard', function (req, res) {
@@ -49,7 +62,8 @@ app.post('/register',function(req,res) {
   userJSON.push(newUser);
   var jsonString = JSON.stringify(userJSON, null, 2);
   fs.writeFile("data/users.json", jsonString);
-  res.redirect('/');
+  req.flash("notification", "New Account Added");
+  res.redirect('/?newUser=true');
 });
 
 app.post('/login',function(req,res) {

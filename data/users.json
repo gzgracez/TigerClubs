@@ -50,5 +50,18 @@
     "clubs_leader": [
       0
     ]
+  },
+  {
+    "id": 4,
+    "userType": "student",
+    "username": "tests",
+    "password": "testst",
+    "firstName": "test",
+    "lastName": "tests",
+    "email": "test",
+    "clubs_member": [],
+    "clubs_leader": [
+      0
+    ]
   }
 ]
