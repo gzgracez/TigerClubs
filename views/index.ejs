@@ -3,9 +3,15 @@
  <div class="container">
   <h1 id="title">Tiger Clubs</h1>
   <% if(messages.notification){ %>
-    <div class="alert alert-success" id="placeholderSuccess" role="alert">
-      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
-    </div>
+    <% if(messages.notification == "Could not log in - username or password was incorrect"){ %>
+      <div class="alert alert-danger" id="placeholderWarning" role="alert">
+        <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+      </div>
+    <% } else {%>
+      <div class="alert alert-success" id="placeholderSuccess" role="alert">
+        <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+      </div>
+    <% } %>
   <% } %>
   <% if(session.user == null){ %>
   <form method="post" action="/login">
