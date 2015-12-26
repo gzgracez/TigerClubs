@@ -58,16 +58,37 @@ app.post('/editaccount', function (req, res) {
   var i = req.session.uid;
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
-  userJSON[i]["firstName"] = req.body.eUser.firstName;
-  userJSON[i]["lastName"] = req.body.eUser.lastName;
-  userJSON[i]["email"] = req.body.eUser.email;
-  userJSON[i]["username"] = req.body.eUser.username;
-  userJSON[i]["password"] = req.body.eUser.password;
-  req.session.user = userJSON[i];
-  var jsonString = JSON.stringify(userJSON, null, 2);
-  fs.writeFile("data/users.json", jsonString);
-  req.flash("notification", "Account Information Edited!");
-  res.redirect('/');
+  var taken = false;
+  for (var j = 0; j < userJSON.length; j++) {
+    if (req.body.eUser.username == userJSON[j]["username"]) {
+      if (!(userJSON[j]["username"] == userJSON[i]["username"])) {
+        taken = true;
+        req.flash("notification", "Username already taken.");
+        res.redirect('/editaccount');
+        break;
+      }
+    }
+    else if (req.body.eUser.email == userJSON[j]["email"]) {
+      if (!(userJSON[j]["email"] == userJSON[i]["email"])) {
+        taken = true;
+        req.flash("notification", "Email already in use.");
+        res.redirect('/editaccount');
+        break;
+      }
+    }
+  }
+  if (!taken) {
+    userJSON[i]["firstName"] = req.body.eUser.firstName;
+    userJSON[i]["lastName"] = req.body.eUser.lastName;
+    userJSON[i]["email"] = req.body.eUser.email;
+    userJSON[i]["username"] = req.body.eUser.username;
+    userJSON[i]["password"] = req.body.eUser.password;
+    req.session.user = userJSON[i];
+    var jsonString = JSON.stringify(userJSON, null, 2);
+    fs.writeFile("data/users.json", jsonString);
+    req.flash("notification", "Account Information Edited!");
+    res.redirect('/');
+  }
 });
 
 app.get('/register',function(req,res) {
@@ -133,6 +154,7 @@ app.post('/login',function(req,res) {
 
 app.get('/logout',function(req,res) {
   req.session.user = null;
+  req.session.uid = null;
   // req.session.destroy();
   req.flash("notification", "Successfully Logged Out!");
   res.redirect('/');

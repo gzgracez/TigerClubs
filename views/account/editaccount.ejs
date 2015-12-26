@@ -1,5 +1,12 @@
 <% include ../header %>
 <div class="container">
+  
+    <% if(messages.notification){ %>
+    <div class="alert alert-danger" id="placeholderWarning" role="alert">
+      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+    </div>
+  <% } %>
+
   <form method="post" action="/editaccount">
     <label for="email">Email:</label>
     <input type="email" name="eUser[email]" value="<%= session.user.email %>" placeholder="Email" class="form-control" required><br>
