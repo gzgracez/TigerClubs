@@ -67,10 +67,17 @@ app.post('/login',function(req,res) {
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
   for (var i = 0; i < userJSON.length; i++) {
-    if (req.body.lUser.username == userJSON[i]["username"]) {
+    if (req.body.lUser.username == userJSON[i]["username"]
+      && req.body.lUser.password == userJSON[i]["password"]) {
       req.session.user = userJSON[i];
       break;
     }
+  }
+  if (req.session.user) {
+    req.flash("notification", "Successfully logged in!");
+  }
+  else {
+    req.flash("notification", "Could not log in - username or password was incorrect");
   }
   res.redirect('/');
 });
