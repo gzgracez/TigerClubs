@@ -17,8 +17,16 @@ var content = fs.readFileSync("static/index.html", 'utf8');
 app.use("/static", express.static('static'));
 app.set('view engine', 'ejs');
 app.use(function(req,res,next){
-    res.locals.session = req.session;
-    next();
+  res.locals.session = req.session;
+  next();
+});
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      title: "Error",
+      message: err.message,
+      error: {}
+    });
 });
 
 app.get('/', function (req, res) {
@@ -70,16 +78,16 @@ app.post('/login',function(req,res) {
     if (req.body.lUser.username == userJSON[i]["username"]
       && req.body.lUser.password == userJSON[i]["password"]) {
       req.session.user = userJSON[i];
-      break;
-    }
+    break;
   }
-  if (req.session.user) {
-    req.flash("notification", "Successfully logged in!");
-  }
-  else {
-    req.flash("notification", "Could not log in - username or password was incorrect");
-  }
-  res.redirect('/');
+}
+if (req.session.user) {
+  req.flash("notification", "Successfully logged in!");
+}
+else {
+  req.flash("notification", "Could not log in - username or password was incorrect");
+}
+res.redirect('/');
 });
 
 app.get('/logout',function(req,res) {
@@ -164,6 +172,10 @@ app.post('/clubs/:id/announcements',function(req,res) {
 
 app.put('/clubs/:id/request',function(req,res) {
 
+});
+
+app.use(function(req, res, next){
+    res.status(404).render('404', {title: "404 page not found"});
 });
 
 var server = app.listen(process.env.PORT || 4000, function() {
