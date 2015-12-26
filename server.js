@@ -16,6 +16,10 @@ app.use(flash());
 var content = fs.readFileSync("static/index.html", 'utf8');
 app.use("/static", express.static('static'));
 app.set('view engine', 'ejs');
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
 
 app.get('/', function (req, res) {
   res.render('index', {title: 'Tiger Clubs Home'});
@@ -60,7 +64,25 @@ app.post('/register',function(req,res) {
 });
 
 app.post('/login',function(req,res) {
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+  for (var i = 0; i < userJSON.length; i++) {
+    if (req.body.lUser.username == userJSON[i]["username"]) {
+      req.session.user = userJSON[i];
+      break;
+    }
+  }
+  res.redirect('/');
+});
 
+app.get('/logout',function(req,res) {
+  // req.session = null;
+  req.session.destroy();
+  res.redirect('/');
+});
+
+app.get('/schedule',function(req,res) {
+  res.render('schedule', {title: 'Schedule'});
 });
 
 app.get('/users/:id',function(req,res) {
