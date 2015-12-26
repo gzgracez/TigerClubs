@@ -28,102 +28,11 @@
   {
     "id": 2,
     "userType": "student",
-    "username": "testUser",
-    "password": "password",
+    "username": "test",
+    "password": "test",
     "firstName": "testFirst",
     "lastName": "testLast",
     "email": "test@test.com",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 3,
-    "userType": "student",
-    "username": "test",
-    "password": "test",
-    "firstName": "test",
-    "lastName": "test",
-    "email": "test@test.com",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 4,
-    "userType": "student",
-    "username": "tests",
-    "password": "testst",
-    "firstName": "test",
-    "lastName": "tests",
-    "email": "test",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 5,
-    "userType": "student",
-    "username": "tests",
-    "password": "tests",
-    "firstName": "test",
-    "lastName": "tests",
-    "email": "test",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 6,
-    "userType": "student",
-    "username": "jlk",
-    "password": "lkj",
-    "firstName": "j",
-    "lastName": "lj",
-    "email": "tes",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 7,
-    "userType": "student",
-    "username": "test",
-    "password": "",
-    "firstName": "test",
-    "lastName": "tests",
-    "email": "test@test",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 8,
-    "userType": "student",
-    "username": "test",
-    "password": "",
-    "firstName": "test",
-    "lastName": "",
-    "email": "test@mfsad.com",
-    "clubs_member": [],
-    "clubs_leader": [
-      0
-    ]
-  },
-  {
-    "id": 9,
-    "userType": "student",
-    "username": "tryagain",
-    "password": "",
-    "firstName": "",
-    "lastName": "",
-    "email": "asd@fjal.com",
     "clubs_member": [],
     "clubs_leader": [
       0
