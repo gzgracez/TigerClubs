@@ -57,24 +57,35 @@ app.get('/register',function(req,res) {
 });
 
 app.post('/register',function(req,res) {
+  var usernameTaken = false;
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
-  var newUser = {
-    "id": userJSON[userJSON.length - 1].id + 1,
-    "userType": "student",
-    "username": req.body.rUser.username,
-    "password": req.body.rUser.password,
-    "firstName": req.body.rUser.firstName,
-    "lastName": req.body.rUser.lastName,
-    "email": req.body.rUser.email,
-    "clubs_member": [],
-    "clubs_leader": [0]
-  };
-  userJSON.push(newUser);
-  var jsonString = JSON.stringify(userJSON, null, 2);
-  fs.writeFile("data/users.json", jsonString);
-  req.flash("notification", "New Account Added");
-  res.redirect('/');
+  for (var i = 0; i < userJSON.length; i++) {
+    if (req.body.rUser.username == userJSON[i]["username"]) {
+      usernameTaken = true;
+      req.flash("notification", "Username already taken.");
+      res.redirect('/register');
+      break;
+    }
+  }
+  if (!usernameTaken) {
+    var newUser = {
+      "id": userJSON[userJSON.length - 1].id + 1,
+      "userType": "student",
+      "username": req.body.rUser.username,
+      "password": req.body.rUser.password,
+      "firstName": req.body.rUser.firstName,
+      "lastName": req.body.rUser.lastName,
+      "email": req.body.rUser.email,
+      "clubs_member": [],
+      "clubs_leader": [0]
+    };
+    userJSON.push(newUser);
+    var jsonString = JSON.stringify(userJSON, null, 2);
+    fs.writeFile("data/users.json", jsonString);
+    req.flash("notification", "New Account Added");
+    res.redirect('/');
+  }
 });
 
 app.post('/login',function(req,res) {
