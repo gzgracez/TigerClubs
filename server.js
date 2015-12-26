@@ -21,12 +21,12 @@ app.use(function(req,res,next){
   next();
 });
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      title: "Error",
-      message: err.message,
-      error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    title: "Error",
+    message: err.message,
+    error: {}
+  });
 });
 
 app.get('/', function (req, res) {
@@ -34,11 +34,17 @@ app.get('/', function (req, res) {
 });
 
 app.get('/dashboard', function (req, res) {
-  res.render('dashboard', {title: 'My Dashboard'});
+  if (req.session.user)
+    res.render('dashboard', {title: 'My Dashboard'});
+  else
+    res.render('notLoggedIn', {title: 'My Dashboard'});
 });
 
 app.get('/myaccount', function (req, res) {
-  res.render('myaccount', {title: 'My Account'});
+  if (req.session.user)
+    res.render('myaccount', {title: 'My Account'});
+  else
+    res.render('notLoggedIn', {title: 'My Account'});
 });
 
 app.get('/users',function(req,res) {
@@ -75,19 +81,18 @@ app.post('/login',function(req,res) {
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
   for (var i = 0; i < userJSON.length; i++) {
-    if (req.body.lUser.username == userJSON[i]["username"]
-      && req.body.lUser.password == userJSON[i]["password"]) {
+    if (req.body.lUser.username == userJSON[i]["username"] && req.body.lUser.password == userJSON[i]["password"]) {
       req.session.user = userJSON[i];
-    break;
+      break;
+    }
   }
-}
-if (req.session.user) {
-  req.flash("notification", "Successfully logged in!");
-}
-else {
-  req.flash("notification", "Could not log in - username or password was incorrect");
-}
-res.redirect('/');
+  if (req.session.user) {
+    req.flash("notification", "Successfully logged in!");
+  }
+  else {
+    req.flash("notification", "Could not log in - username or password was incorrect");
+  }
+  res.redirect('/');
 });
 
 app.get('/logout',function(req,res) {
@@ -98,7 +103,10 @@ app.get('/logout',function(req,res) {
 });
 
 app.get('/schedule',function(req,res) {
-  res.render('schedule', {title: 'Schedule'});
+  if (req.session.user)
+    res.render('schedule', {title: 'Schedule'});
+  else
+    res.render('notLoggedIn', {title: 'Schedule'});
 });
 
 app.get('/users/:id',function(req,res) {
@@ -118,7 +126,10 @@ app.delete('/users/:id',function(req,res) {
 });
 
 app.get('/clubs',function(req,res) {
-  res.render('clubs', {title: 'My Clubs'});
+  if (req.session.user)
+    res.render('clubs', {title: 'My Clubs'});
+  else
+    res.render('notLoggedIn', {title: 'My Clubs'});
 });
 
 app.post('/clubs',function(req,res) {
@@ -175,7 +186,7 @@ app.put('/clubs/:id/request',function(req,res) {
 });
 
 app.use(function(req, res, next){
-    res.status(404).render('404', {title: "404 page not found"});
+  res.status(404).render('404', {title: "404 page not found"});
 });
 
 var server = app.listen(process.env.PORT || 4000, function() {
