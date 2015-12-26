@@ -83,8 +83,9 @@ app.post('/login',function(req,res) {
 });
 
 app.get('/logout',function(req,res) {
-  // req.session = null;
-  req.session.destroy();
+  req.session.user = null;
+  // req.session.destroy();
+  req.flash("notification", "Successfully Logged Out!");
   res.redirect('/');
 });
 
