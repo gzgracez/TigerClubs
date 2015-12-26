@@ -102,5 +102,31 @@
     "clubs_leader": [
       0
     ]
+  },
+  {
+    "id": 8,
+    "userType": "student",
+    "username": "test",
+    "password": "",
+    "firstName": "test",
+    "lastName": "",
+    "email": "test@mfsad.com",
+    "clubs_member": [],
+    "clubs_leader": [
+      0
+    ]
+  },
+  {
+    "id": 9,
+    "userType": "student",
+    "username": "tryagain",
+    "password": "",
+    "firstName": "",
+    "lastName": "",
+    "email": "asd@fjal.com",
+    "clubs_member": [],
+    "clubs_leader": [
+      0
+    ]
   }
 ]
