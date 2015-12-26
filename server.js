@@ -57,18 +57,24 @@ app.get('/register',function(req,res) {
 });
 
 app.post('/register',function(req,res) {
-  var usernameTaken = false;
+  var taken = false;
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
   for (var i = 0; i < userJSON.length; i++) {
     if (req.body.rUser.username == userJSON[i]["username"]) {
-      usernameTaken = true;
+      taken = true;
       req.flash("notification", "Username already taken.");
       res.redirect('/register');
       break;
     }
+    else if (req.body.rUser.email == userJSON[i]["email"]) {
+      taken = true;
+      req.flash("notification", "Email already in use.");
+      res.redirect('/register');
+      break;
+    }
   }
-  if (!usernameTaken) {
+  if (!taken) {
     var newUser = {
       "id": userJSON[userJSON.length - 1].id + 1,
       "userType": "student",
