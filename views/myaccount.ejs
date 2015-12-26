@@ -1,6 +1,9 @@
 <% include header %>
-
  <div class="container">
   <h1>My Account</h1>
+  <p><strong>First Name: </strong><%= session.user.firstName %></p>
+  <p><strong>Last Name: </strong><%= session.user.lastName %></p>
+  <p><strong>Email: </strong><%= session.user.email %></p>
+  <p><strong>Username: </strong><%= session.user.username %></p>
 </div>
 <% include footer %>

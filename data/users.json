@@ -30,8 +30,8 @@
     "userType": "student",
     "username": "test",
     "password": "test",
-    "firstName": "testFirst",
-    "lastName": "testLast",
+    "firstName": "Test",
+    "lastName": "Ing",
     "email": "test@test.com",
     "clubs_member": [],
     "clubs_leader": [
