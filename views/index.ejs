@@ -2,8 +2,12 @@
 
  <div class="container">
   <h1 id="title">Tiger Clubs</h1>
-  <%= messages.notification ? messages.notification : '' %>
-  <form id="nameForm" role="form">
+  <% if(messages.notification){ %>
+    <div class="alert alert-success" id="placeholderSuccess" role="alert">
+      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+    </div>
+  <% } %>
+    <form id="nameForm" role="form">
     <div class="form-group">
       <label for="name">Username:</label>
       <input type="text" id="lusername" name="username" placeholder="Username" class="form-control"><br>

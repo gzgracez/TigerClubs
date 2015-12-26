@@ -18,14 +18,7 @@ app.use("/static", express.static('static'));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-  if (req.query.newUser) {
-    res.render('index', {title: 'Tiger Clubs Home', newUser: true});
-    console.log("new");
-  }
-  else {
-    res.render('index', {title: 'Tiger Clubs Home'});
-    console.log("no new users");
-  }
+  res.render('index', {title: 'Tiger Clubs Home'});
 });
 
 app.get('/dashboard', function (req, res) {
@@ -63,7 +56,7 @@ app.post('/register',function(req,res) {
   var jsonString = JSON.stringify(userJSON, null, 2);
   fs.writeFile("data/users.json", jsonString);
   req.flash("notification", "New Account Added");
-  res.redirect('/?newUser=true');
+  res.redirect('/');
 });
 
 app.post('/login',function(req,res) {
