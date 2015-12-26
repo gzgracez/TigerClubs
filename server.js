@@ -42,18 +42,36 @@ app.get('/dashboard', function (req, res) {
 
 app.get('/myaccount', function (req, res) {
   if (req.session.user)
-    res.render('myaccount', {title: 'My Account'});
+    res.render('account/myaccount', {title: 'My Account'});
   else
     res.render('notLoggedIn', {title: 'My Account'});
 });
 
-app.get('/users',function(req,res) {
-	var users = fs.readFileSync('data/users.json', 'utf8');
-	res.send(users);
+app.get('/editaccount', function (req, res) {
+  if (req.session.user)
+    res.render('account/editaccount', {title: 'Edit Account'});
+  else
+    res.render('notLoggedIn', {title: 'Edit Account'});
+});
+
+app.post('/editaccount', function (req, res) {
+  var i = req.session.uid;
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+  userJSON[i]["firstName"] = req.body.eUser.firstName;
+  userJSON[i]["lastName"] = req.body.eUser.lastName;
+  userJSON[i]["email"] = req.body.eUser.email;
+  userJSON[i]["username"] = req.body.eUser.username;
+  userJSON[i]["password"] = req.body.eUser.password;
+  req.session.user = userJSON[i];
+  var jsonString = JSON.stringify(userJSON, null, 2);
+  fs.writeFile("data/users.json", jsonString);
+  req.flash("notification", "Account Information Edited!");
+  res.redirect('/');
 });
 
 app.get('/register',function(req,res) {
-  res.render('register', {title: 'Register'});
+  res.render('account/register', {title: 'Register'});
 });
 
 app.post('/register',function(req,res) {
@@ -100,6 +118,7 @@ app.post('/login',function(req,res) {
   for (var i = 0; i < userJSON.length; i++) {
     if (req.body.lUser.username == userJSON[i]["username"] && req.body.lUser.password == userJSON[i]["password"]) {
       req.session.user = userJSON[i];
+      req.session.uid = i;
       break;
     }
   }
@@ -124,6 +143,11 @@ app.get('/schedule',function(req,res) {
     res.render('schedule', {title: 'Schedule'});
   else
     res.render('notLoggedIn', {title: 'Schedule'});
+});
+
+app.get('/users',function(req,res) {
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  res.send(users);
 });
 
 app.get('/users/:id',function(req,res) {
