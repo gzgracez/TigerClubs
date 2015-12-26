@@ -16,7 +16,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="<%= title=='My Dashboard' ? 'active' : ''%>"><a href="/dashboard" class="cNavbar" id="navDashboard">My Dashboard</a></li>
-        <li class="<%= title=='My Account' ? 'active' : ''%>"><a href="/myaccount" class="cNavbar" id="navAccount">My Account</a></li>
+        <li class="<%= (title=='My Account' || title=='Edit Account') ? 'active' : ''%>"><a href="/myaccount" class="cNavbar" id="navAccount">My Account</a></li>
         <% if (session.user) {%>
             <li><a href="/logout" class="cNavbar">Logout</a></li>
         <% } %>
