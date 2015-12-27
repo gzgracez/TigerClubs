@@ -9,5 +9,16 @@
 	"announcements":[],
 	"events":[],
 	"link":[]
+	},
+		{
+	"id":1,
+	"clubname":"Club2",
+	"description":"A club2",
+	"advisorID":[1],
+	"leaders":[0],
+	"requests":[],
+	"announcements":[],
+	"events":[],
+	"link":[]
 	}
 ]
