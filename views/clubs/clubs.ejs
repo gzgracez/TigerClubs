@@ -1,6 +1,6 @@
-<% include header %>
+<% include ../header %>
 
- <div class="container">
+<div class="container">
   <h1>My Clubs</h1>
 
   <% if((session.user.clubs_leader.length > 0) || (session.user.clubs_member.length > 0)){ %>
@@ -25,4 +25,5 @@
     <p>You are not currently a member of any clubs! Check out all Trinity clubs <a href="/allclubs">here</a>.</p>
   <% } %>
 </div>
-<% include footer %>
+
+<% include ../footer %>

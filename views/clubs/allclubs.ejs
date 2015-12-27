@@ -1,0 +1,12 @@
+<% include ../header %>
+
+<div class="container">
+  <h1>All Clubs</h1>
+
+  <% for(var i = 0; i < clubs.length; i++) {%>
+    <p><strong><%= clubs[i]["clubname"] %></strong>: <%= clubs[i]["description"] %></p>
+  <% } %>
+
+</div>
+
+<% include ../footer %>

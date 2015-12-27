@@ -188,9 +188,23 @@ app.delete('/users/:id',function(req,res) {
 
 });
 
+app.get('/allclubs',function(req,res) {
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  var allClubs = [];
+  for (var i = 0; i < clubsJSON.length; i++) {
+    var temp = {
+      "clubname": clubsJSON[i]["clubname"],
+      "description": clubsJSON[i]["description"]
+    };
+    allClubs.push(temp);
+  }
+  res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs});
+});
+
 app.get('/clubs',function(req,res) {
   if (req.session.user)
-    res.render('clubs', {title: 'My Clubs'});
+    res.render('clubs/clubs', {title: 'My Clubs'});
   else
     res.render('notLoggedIn', {title: 'My Clubs'});
 });
