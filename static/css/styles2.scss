@@ -28,6 +28,10 @@ body {
   }
 }
 
+table {
+  font-size: 24px;
+}
+
 .nameAlert{
   font-size: 16px;
   text-decoration: none;
@@ -48,14 +52,6 @@ body {
 
 .btn {
   font-size: 16px;
-}
-
-.table { border: 1px solid #2980B9; }
-.table thead > tr > th { border-bottom: none; }
-.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td { border: 1px solid #000000; }
-
-th {
-  text-align: center;
 }
 
 .questionNum {
@@ -123,23 +119,6 @@ form{
 label#ansLabels {
   float: inherit;
   font-weight: 300;
-}
-
-table,{
-  border: 2px solid black;
-  text-align: center;
-  font-size: 20px;
-}
-
-tr{
-  padding: 10px; 
-  border:2px solid black;
-}
-
-td{
- padding-left: 10px;
- padding-right: 10px;
- border:2px solid black;
 }
 
 .notice{
@@ -211,4 +190,8 @@ td{
   display: inline;
   margin-bottom: 10px;
   margin-right: 5px;
+}
+
+.allclubs{
+  font-size: 28px;
 }
