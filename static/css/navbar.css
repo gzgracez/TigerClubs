@@ -54,20 +54,6 @@ form label {
     display: inline-block;
     float: left
 }
-table {
-    border: 2px solid black;
-    text-align: center;
-    font-size: 20px
-}
-tr {
-    padding: 10px;
-    border: 2px solid black
-}
-td {
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 2px solid black
-}
 .notice {
     font-size: 16px;
     color: #1f6300
