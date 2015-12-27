@@ -42,14 +42,9 @@ a .nav,
 a .icon-bar,
 a .navbar-default {
     color: #00B7FF;
-    background-color: #00B7FF
+    background-color: #00B7FF;
 }
-p,
-a,
-li,
-label {
-    font-size: 20px
-}
+
 form label {
     display: inline-block;
     float: left
