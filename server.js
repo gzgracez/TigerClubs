@@ -123,7 +123,7 @@ app.post('/register',function(req,res) {
       "lastName": req.body.rUser.lastName,
       "email": req.body.rUser.email,
       "clubs_member": [],
-      "clubs_leader": [0]
+      "clubs_leader": []
     };
     userJSON.push(newUser);
     var jsonString = JSON.stringify(userJSON, null, 2);

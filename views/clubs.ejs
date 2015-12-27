@@ -2,5 +2,27 @@
 
  <div class="container">
   <h1>My Clubs</h1>
+
+  <% if((session.user.clubs_leader.length > 0) || (session.user.clubs_member.length > 0)){ %>
+
+    <p>View all available clubs <a href="/allclubs">here</a>.</p>
+    <% if(session.user.clubs_leader.length > 0){ %>
+      <p>You are currently a leader of the following clubs:</p>
+      <% for(var i = 0; i < session.user.clubs_member.length; i++) {%>
+        
+      <% } %>
+    <% } %>
+
+    <% if(session.user.clubs_member.length > 0){ %>
+      <p>You are currently a member of the following clubs:</p>
+      <% for(var i = 0; i < session.user.clubs_member.length; i++) {%>
+        
+      <% } %>
+    <% } %>
+
+  <% } else { %>
+
+    <p>You are not currently a member of any clubs! Check out all Trinity clubs <a href="/allclubs">here</a>.</p>
+  <% } %>
 </div>
 <% include footer %>
