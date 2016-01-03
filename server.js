@@ -15,6 +15,7 @@ app.use(session({secret: 'tigerClubsYay'}));
 app.use(flash());
 var content = fs.readFileSync("static/index.html", 'utf8');
 app.use("/static", express.static('static'));
+app.use('/bower_components',  express.static('/bower_components'));
 app.set('view engine', 'ejs');
 app.use(function(req,res,next){
   res.locals.session = req.session;

@@ -1,0 +1,24 @@
+{
+  "name": "tigerclubs",
+  "description": "A management system for Trinity Clubs and Community Service Groups",
+  "main": "server.js",
+  "authors": [
+    "TigerClubs"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/gzgracez/TigerClubs",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6",
+    "bootstrap-material-design": "~0.5.7"
+  },
+  "private": true
+}
