@@ -18,7 +18,7 @@ gulp.task('css', function() { 
              loadPath: [
                  './static/css',
                  paths.bowerDir + '/bootstrap-sass/assets/stylesheets',
-//                  paths.bowerDir + '/bootstrap-material-design/sass',
+                 paths.bowerDir + '/bootstrap-material-design/sass',
              ]
          }) 
             
