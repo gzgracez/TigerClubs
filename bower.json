@@ -8,6 +8,7 @@
   "license": "ISC",
   "homepage": "https://github.com/gzgracez/TigerClubs",
   "moduleType": [],
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -19,6 +20,5 @@
     "jquery": "~2.1.4",
     "bootstrap": "~3.3.6",
     "bootstrap-material-design": "~0.5.7"
-  },
-  "private": true
+  }
 }
