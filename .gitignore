@@ -2,6 +2,7 @@
 .sass-cache/
 *.css.map
 file.txt
+bower_components
 # Logs
 logs
 *.log
