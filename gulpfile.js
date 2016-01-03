@@ -30,4 +30,4 @@ gulp.task('css', function() { 
      gulp.watch(paths.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'css']);
+  gulp.task('default', ['bower', 'css', 'watch']);
