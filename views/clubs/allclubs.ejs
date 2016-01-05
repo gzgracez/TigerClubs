@@ -22,7 +22,13 @@
               <%= clubs[i]["description"] %>
             </td>
             <td>
-              <button type="button" class="btn btn-primary">Join</button>
+              <% if (user["clubs_member"].indexOf(clubs[i]["id"]) > -1){ %>
+                <p>Club Member</p>
+              <% } else if (user["clubs_leader"].indexOf(clubs[i]["id"]) > -1){ %>
+                <p>Club Leader</p>
+              <% } else { %>
+                <button type="button" class="btn btn-primary">Join</button>
+              <% } %>
             </td>
         </tr>
       <% } %>

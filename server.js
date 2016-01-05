@@ -192,15 +192,22 @@ app.delete('/users/:id',function(req,res) {
 app.get('/allclubs',function(req,res) {
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
   var allClubs = [];
   for (var i = 0; i < clubsJSON.length; i++) {
     var temp = {
+      "id": clubsJSON[i]["id"],
       "clubname": clubsJSON[i]["clubname"],
       "description": clubsJSON[i]["description"]
     };
     allClubs.push(temp);
   }
-  res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs});
+  var user = {
+    "clubs_member": userJSON[req.session.uid]["clubs_member"],
+    "clubs_leader": userJSON[req.session.uid]["clubs_leader"]
+  }
+  res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs, user: user});
 });
 
 app.get('/clubs',function(req,res) {

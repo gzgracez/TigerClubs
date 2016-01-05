@@ -7,7 +7,9 @@
     "firstName": "studentFirstName",
     "lastName": "studentLastName",
     "email": "student@email.com",
-    "clubs_member": [],
+    "clubs_member": [
+      0
+    ],
     "clubs_leader": [
       0
     ]
@@ -33,7 +35,20 @@
     "firstName": "Test",
     "lastName": "IngEDIT",
     "email": "test@test.com",
-    "clubs_member": [0],
+    "clubs_member": [
+      1
+    ],
+    "clubs_leader": []
+  },
+  {
+    "id": 3,
+    "userType": "student",
+    "username": "test2",
+    "password": "test",
+    "firstName": "Test",
+    "lastName": "Ing2",
+    "email": "test2@test.com",
+    "clubs_member": [],
     "clubs_leader": []
   }
 ]
