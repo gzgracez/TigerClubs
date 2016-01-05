@@ -245,6 +245,19 @@ app.post('/joinclub/:id',function(req,res) {
   res.redirect('/allclubs');
 });
 
+app.post('/leaveclub/:id',function(req,res) {
+  var clubID = parseInt(req.params.id);
+  var i = req.session.uid;
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+  var clubIndex = userJSON[i]["clubs_member"].indexOf(clubID);
+  req.session.user = userJSON[i];
+  var jsonString = JSON.stringify(userJSON, null, 2);
+  fs.writeFile("data/users.json", jsonString);
+  res.redirect('/allclubs');
+});
+
+
 app.post('/clubs',function(req,res) {
 
 });
