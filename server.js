@@ -190,24 +190,28 @@ app.delete('/users/:id',function(req,res) {
 });
 
 app.get('/allclubs',function(req,res) {
-  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
-  var clubsJSON = JSON.parse(clubs);
-  var users = fs.readFileSync('data/users.json', 'utf8');
-  var userJSON = JSON.parse(users);
-  var allClubs = [];
-  for (var i = 0; i < clubsJSON.length; i++) {
-    var temp = {
-      "id": clubsJSON[i]["id"],
-      "clubname": clubsJSON[i]["clubname"],
-      "description": clubsJSON[i]["description"]
-    };
-    allClubs.push(temp);
+  if (req.session.user) {
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    var allClubs = [];
+    for (var i = 0; i < clubsJSON.length; i++) {
+      var temp = {
+        "id": clubsJSON[i]["id"],
+        "clubname": clubsJSON[i]["clubname"],
+        "description": clubsJSON[i]["description"]
+      };
+      allClubs.push(temp);
+    }
+    var user = {
+      "clubs_member": userJSON[req.session.uid]["clubs_member"],
+      "clubs_leader": userJSON[req.session.uid]["clubs_leader"]
+    }
+    res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs, user: user});
   }
-  var user = {
-    "clubs_member": userJSON[req.session.uid]["clubs_member"],
-    "clubs_leader": userJSON[req.session.uid]["clubs_leader"]
-  }
-  res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs, user: user});
+  else
+    res.render('notLoggedIn', {title: 'All Clubs'});
 });
 
 app.get('/clubs',function(req,res) {
@@ -227,6 +231,18 @@ app.get('/clubs',function(req,res) {
   }
   else
     res.render('notLoggedIn', {title: 'My Clubs'});
+});
+
+app.post('/joinclub/:id',function(req,res) {
+  var clubID = parseInt(req.params.id);
+  var i = req.session.uid;
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+  userJSON[i]["clubs_member"].push(clubID);
+  req.session.user = userJSON[i];
+  var jsonString = JSON.stringify(userJSON, null, 2);
+  fs.writeFile("data/users.json", jsonString);
+  res.redirect('/allclubs');
 });
 
 app.post('/clubs',function(req,res) {
