@@ -1,8 +1,8 @@
 [
 	{
 	"id":0,
-	"clubname":"Club",
-	"description":"A club",
+	"clubname":"Club0",
+	"description":"A club0",
 	"advisorID":[1],
 	"leaders":[0,1],
 	"requests":[],
@@ -12,8 +12,8 @@
 	},
 		{
 	"id":1,
-	"clubname":"Club2",
-	"description":"A club2",
+	"clubname":"Club1",
+	"description":"A club1",
 	"advisorID":[1],
 	"leaders":[0],
 	"requests":[],
