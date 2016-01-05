@@ -6,6 +6,9 @@ $lighterNavy: #0000d3;
 $yellow: #dcdd63;
 $gray: #F8F8F8;
 $green: #1f6300;
+$navBackgroundColor: #FFE4C4;
+$navHoverGray: #777;
+$navTextBlack: #000;
 $red: red;
 
 html, body {
@@ -86,25 +89,37 @@ h3 {
 nav {
   a {
     text-decoration: none;
-    color: $navy;
+  }
+  .navbar-fixed-top {
+    background-color:#FFE4C4;
   }
 }
 
-a {
-  color: $lighterNavy;
-  &:hover{
-    color: #00B7FF;
+.navbar-default {
+  background-color:$navBackgroundColor;
+  .navbar-toggle {
+      border-color: #729de1;
+      :focus, :hover {
+        background-color: #d1efff;
+      }
   }
-  .cNavbar{
-    color: $navy;
-  }
-  .navbar-brand{
-    color: $navy;
-  }
-  #navbar, .navbar-nav, .nav, .icon-bar, .navbar-default{
-    color: $navy;
-    background-color: $navy;
-  }
+}
+
+
+.navbar-default .navbar-nav>li>a {
+    color:$navTextBlack;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color:$navHoverGray;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
+    color: $navTextBlack;
+}
+
+.navbar-default .navbar-nav>.active>a:hover {
+    color: $navHoverGray;
 }
 
 p, a, li, label{
