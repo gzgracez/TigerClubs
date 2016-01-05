@@ -8,15 +8,19 @@
     <p>View all available clubs <a href="/allclubs">here</a>.</p>
     <% if(session.user.clubs_leader.length > 0){ %>
       <p>You are currently a leader of the following clubs:</p>
-      <% for(var i = 0; i < session.user.clubs_member.length; i++) {%>
-        
+      <% for(var i = 0; i < clubs.length; i++) {%>
+        <% if(session.user.clubs_leader.indexOf(clubs[i]["id"]) > -1){ %>
+          <li><%= clubs[i]["clubname"] %></li>
+        <% } %>
       <% } %>
     <% } %>
 
     <% if(session.user.clubs_member.length > 0){ %>
       <p>You are currently a member of the following clubs:</p>
-      <% for(var i = 0; i < session.user.clubs_member.length; i++) {%>
-        
+      <% for(var i = 0; i < clubs.length; i++) {%>
+        <% if(session.user.clubs_member.indexOf(clubs[i]["id"]) > -1){ %>
+          <li><%= clubs[i]["clubname"] %></li>
+        <% } %>
       <% } %>
     <% } %>
 
