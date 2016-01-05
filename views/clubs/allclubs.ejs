@@ -27,7 +27,7 @@
               <% } else if (user["clubs_leader"].indexOf(clubs[i]["id"]) > -1){ %>
                 <p>Club Leader</p>
               <% } else { %>
-                <form method="post" action="/joinclub">
+                <form method="post" action="/joinclub/<%= clubs[i]["id"] %>">
                   <input class="btn btn-primary" class="form-control" type="submit" value="Join">
                 </form>
               <% } %>
