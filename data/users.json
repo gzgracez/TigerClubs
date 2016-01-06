@@ -36,7 +36,8 @@
     "lastName": "IngEDIT",
     "email": "test@test.com",
     "clubs_member": [
-      0
+      0,
+      1
     ],
     "clubs_leader": []
   },
