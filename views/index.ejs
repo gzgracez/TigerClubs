@@ -1,7 +1,4 @@
 <% include header %>
-
- <div class="container">
-  <h1 id="title">Tiger Clubs</h1>
   <% if(messages.notification){ %>
     <% if(messages.notification == "Could not log in - username or password was incorrect"){ %>
       <div class="alert alert-danger" id="placeholderWarning" role="alert">
@@ -33,6 +30,4 @@
   <% } else { %>
     <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
   <% } %>
-
-</div>
 <% include footer %>
