@@ -141,6 +141,7 @@ app.post('/login',function(req,res) {
     if (req.body.lUser.username == userJSON[i]["username"] && req.body.lUser.password == userJSON[i]["password"]) {
       req.session.user = userJSON[i];
       req.session.uid = i;
+      req.session.priv = userJSON[i]["userType"]
       break;
     }
   }
@@ -171,6 +172,17 @@ app.get('/schedule',function(req,res) {
 app.get('/users',function(req,res) {
   var users = fs.readFileSync('data/users.json', 'utf8');
   res.send(users);
+});
+
+app.get('/allusers',function(req,res) {
+  if (req.session.priv == "admin") {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    JSON.parse(users);
+    res.send(users);
+  }
+  else {
+    res.render('notLoggedInAdmin', {title: 'All Users'});
+  }
 });
 
 app.get('/users/:id',function(req,res) {
