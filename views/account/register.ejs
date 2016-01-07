@@ -1,13 +1,11 @@
-  <% include ../header %>
+<% include ../header %>
   
-  <h1>Register</h1>
- <div class="container">
 
-  <% if(messages.notification){ %>
-    <div class="alert alert-danger" id="placeholderWarning" role="alert">
-      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
-    </div>
-  <% } %>
+<% if(messages.notification){ %>
+  <div class="alert alert-danger" id="placeholderWarning" role="alert">
+    <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+  </div>
+<% } %>
 
  <form method="post" action="/register">
     <label for="email">Email:</label>
@@ -27,5 +25,5 @@
 
   <input class="btn btn-primary" class="form-control" type="submit" value="Register"><br><br>
 </form>
-</div>
+
 <% include ../footer %>

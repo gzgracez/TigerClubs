@@ -31,7 +31,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.get('/', function (req, res) {
-  res.render('index', {title: 'Tiger Clubs Home'});
+  res.render('index', {title: 'Tiger Clubs'});
 });
 
 app.get('/dashboard', function (req, res) {
@@ -170,15 +170,21 @@ app.get('/schedule',function(req,res) {
 });
 
 app.get('/users',function(req,res) {
-  var users = fs.readFileSync('data/users.json', 'utf8');
-  res.send(users);
+  if (req.session.priv == "admin") {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    JSON.parse(users);
+    res.send(users);
+  }
+  else {
+    res.render('notLoggedInAdmin', {title: 'All Users'});
+  }
 });
 
 app.get('/allusers',function(req,res) {
   if (req.session.priv == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
-    JSON.parse(users);
-    res.send(users);
+    var userJSON = JSON.parse(users);
+    res.render('allusers', {title: 'All Users', users: userJSON});
   }
   else {
     res.render('notLoggedInAdmin', {title: 'All Users'});
@@ -325,7 +331,7 @@ app.put('/clubs/:id/request',function(req,res) {
 });
 
 app.use(function(req, res, next){
-  res.status(404).render('404', {title: "404 page not found"});
+  res.status(404).render('404', {title: "404 Not Found"});
 });
 
 var server = app.listen(process.env.PORT || 4000, function() {
