@@ -25,8 +25,14 @@
   </form>
   <br>
   <p>Register <a href="/register" class="href">here</a> for an account if you do not have one already!</p>
-  <% } else { %>
+  <% } else if (session.priv == "admin") { %>
     <h2>Welcome, <%= session.user.firstName %> <%= session.user.lastName %>!</h2>
+  <% } else if (session.priv == "advisor") { %>
+    <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
+    <p>Click <a href="/allusers">here</a> to view all users.</p>
+  <% } else { %>
+    <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
   <% } %>
+
 </div>
 <% include footer %>

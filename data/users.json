@@ -1,11 +1,11 @@
 [
   {
     "id": 0,
-    "userType": "student",
-    "username": "studentUsername",
-    "password": "password",
-    "firstName": "studentFirstName",
-    "lastName": "studentLastName",
+    "userType": "admin",
+    "username": "admin",
+    "password": "admin",
+    "firstName": "Ad",
+    "lastName": "Min",
     "email": "student@email.com",
     "clubs_member": [
       0
@@ -30,19 +30,34 @@
   {
     "id": 2,
     "userType": "student",
+    "username": "studentUsername",
+    "password": "password",
+    "firstName": "studentFirstName",
+    "lastName": "studentLastName",
+    "email": "student@email.com",
+    "clubs_member": [
+      0
+    ],
+    "clubs_leader": [
+      0
+    ]
+  },
+  {
+    "id": 3,
+    "userType": "student",
     "username": "test",
     "password": "test",
     "firstName": "Test",
     "lastName": "IngEDIT",
     "email": "test@test.com",
     "clubs_member": [
-      1,
-      0
+      0,
+      1
     ],
     "clubs_leader": []
   },
   {
-    "id": 3,
+    "id": 4,
     "userType": "student",
     "username": "test2",
     "password": "test",
