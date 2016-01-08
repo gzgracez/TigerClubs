@@ -18,7 +18,7 @@
         <% for(var i = 0; i < clubs.length; i++) {%>
           <% if(session.user.clubs_leader.indexOf(clubs[i]["id"]) > -1){ %>
             <tr>
-              <td><%= clubs[i]["clubname"] %></td>
+              <td><a href=<%="clubpage/"+i%>><%= clubs[i]["clubname"] %></a></td>
               <td><%= clubs[i]["description"] %></td>
               <td>Club Leader</td>
             </tr>
@@ -31,7 +31,7 @@
         <% for(var i = 0; i < clubs.length; i++) {%>
           <% if(session.user.clubs_member.indexOf(clubs[i]["id"]) > -1){ %>
             <tr>
-              <td><%= clubs[i]["clubname"] %></td>
+              <td><a href=<%="clubpage/"+i%>><%= clubs[i]["clubname"] %></a></td>
               <td><%= clubs[i]["description"] %></td>
               <td>
                 <form method="post" action="/leaveclub/<%= clubs[i]["id"] %>">
