@@ -1,5 +1,36 @@
 <% include header %>
 
-
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < clubs.length; i++) {%>
+      <tr>
+          <td>
+            <%= clubs[i]["clubname"] %>
+          </td>
+          <td>
+            <%= clubs[i]["description"] %>
+          </td>
+          <td>
+            <% if (user["clubs_member"].indexOf(clubs[i]["id"]) > -1){ %>
+              <p>Club Member</p>
+            <% } else if (user["clubs_leader"].indexOf(clubs[i]["id"]) > -1){ %>
+              <p>Club Leader</p>
+            <% } else { %>
+              <form method="post" action="/joinclub/<%= clubs[i]["id"] %>">
+                <input class="btn btn-primary" class="form-control" type="submit" value="Join">
+              </form>
+            <% } %>
+          </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
 
 <% include footer %>
