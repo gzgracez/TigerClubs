@@ -141,7 +141,6 @@ app.post('/login',function(req,res) {
     if (req.body.lUser.username == userJSON[i]["username"] && req.body.lUser.password == userJSON[i]["password"]) {
       req.session.user = userJSON[i];
       req.session.uid = i;
-      req.session.priv = userJSON[i]["userType"]
       break;
     }
   }
@@ -170,7 +169,7 @@ app.get('/schedule',function(req,res) {
 });
 
 app.get('/users',function(req,res) {
-  if (req.session.priv == "admin") {
+  if (req.session.user["userType"] == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
     JSON.parse(users);
     res.send(users);
@@ -181,7 +180,7 @@ app.get('/users',function(req,res) {
 });
 
 app.get('/allusers',function(req,res) {
-  if (req.session.priv == "admin") {
+  if (req.session.user.userType == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
     var userJSON = JSON.parse(users);
     res.render('allusers', {title: 'All Users', users: userJSON});
@@ -300,13 +299,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   }
   */
   //DO WE WANT MEMBERS LISTED
-  req.session.club = clubData;
-  res.render('clubs/clubpage', {title: req.session.club["clubname"], club: req.session.club});
-});
-
-app.get('/clubpage',function(req,res) {//redirect to here after session.club is defined with specific club
-  console.log(req.session.club);
-  res.render('clubs/clubpage', {title: req.session.club["clubname"], club: req.session.club});
+  res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
 });
 
 app.get('/clubs/:id',function(req,res) {

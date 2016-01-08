@@ -5,10 +5,9 @@
     "username": "admin",
     "password": "admin",
     "firstName": "Ad",
-    "lastName": "Min",
+    "lastName": "Min1",
     "email": "student@email.com",
     "clubs_member": [
-      0
     ],
     "clubs_leader": [
       0
@@ -16,11 +15,11 @@
   },
   {
     "id": 1,
-    "userType": "admin2",
+    "userType": "admin",
     "username": "admin",
     "password": "admin",
     "firstName": "Ad",
-    "lastName": "Min",
+    "lastName": "Min2",
     "email": "student@email.com",
     "clubs_member": [
       0
