@@ -6,7 +6,17 @@
 	"advisorID":[1],
 	"leaders":[0,1],
 	"requests":[],
-	"announcements":[],
+	"announcements":[
+		{
+			"id":0,
+			"clubID":0,
+			"name":"Announcement",
+			"description":"This is an announcement",
+			"authorID":0,
+			"postDate": "Fri January 8, 2016"
+
+		}
+	],
 	"events":[],
 	"link":[]
 	},

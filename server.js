@@ -281,8 +281,36 @@ app.post('/clubs',function(req,res) {
 
 });
 
-app.get('/clubs/:id',function(req,res) {
+app.get('/clubpage/:id', function(req,res) {//1st route
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
 
+  var clubID = parseInt(req.params.id);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  var clubData = clubsJSON[clubID];
+  var leaders = [];
+  for (var i = 0; i < clubData["leaders"].length; i++) {
+    leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"])
+  }
+  clubData["leaders"] = leaders;
+  /*
+  for (var i = 0; i < clubData["members"].length; i++) {
+    members.push(userJSON[clubData["members"][i]]["firstName"]+" "+userJSON[clubData["members"][i]]["lastName"])
+  }
+  */
+  //DO WE WANT MEMBERS LISTED
+  req.session.club = clubData;
+  res.redirect('/clubpage');
+});
+
+app.get('/clubpage',function(req,res) {//redirect to here after session.club is defined with specific club
+  console.log(req.session.club);
+  res.render('clubs/clubpage', {title: req.session.club["clubname"], club: req.session.club});
+});
+
+app.get('/clubs/:id',function(req,res) {
+  
 });
 
 app.put('/clubs/:id',function(req,res) {
