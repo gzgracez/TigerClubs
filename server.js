@@ -301,7 +301,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   */
   //DO WE WANT MEMBERS LISTED
   req.session.club = clubData;
-  res.redirect('/clubpage');
+  res.render('clubs/clubpage', {title: req.session.club["clubname"], club: req.session.club});
 });
 
 app.get('/clubpage',function(req,res) {//redirect to here after session.club is defined with specific club
