@@ -18,16 +18,16 @@
   <% for(var i = 0; i < club["announcements"].length; i++) {%>
     <tr>
         <td>
-          <%= club["announcements"]["name"] %>
+          <%= club["announcements"][i]["name"] %>
         </td>
         <td>
-          <%= club["announcements"]["description"] %>
+          <%= club["announcements"][i]["description"] %>
         </td>
         <td>
-          <%= club["announcements"]["authorID"] %>
+          <%= club["announcements"][i]["authorID"] %>
         </td>
          <td>
-          <%= club["announcements"]["postDate"] %>
+          <%= club["announcements"][i]["postDate"] %>
         </td>
 
     </tr>
