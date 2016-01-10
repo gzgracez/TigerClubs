@@ -12,7 +12,7 @@
     <% for(var i = 0; i < clubs.length; i++) {%>
       <tr>
           <td>
-            <a href=<%="clubpage/"+i%>><%= clubs[i]["clubname"] %></a>
+            <a href="clubpage/<%=clubs[i]["id"]%>"><%= clubs[i]["clubname"] %></a>
           </td>
           <td>
             <%= clubs[i]["description"] %>

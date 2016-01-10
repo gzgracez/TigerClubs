@@ -283,7 +283,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   var clubData = clubsJSON[clubID];
   var leaders = [];
   for (var i = 0; i < clubData["leaders"].length; i++) {
-    leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"])
+    leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
   }
   clubData["leaders"] = leaders;
   /*
@@ -349,10 +349,12 @@ app.use(function(req, res) {
    res.render('404', {title: '404 File Not Found'});
 });
 
-app.use(function(error, req, res, next) {
-    res.status(500);
-   res.render('500', {title:'500 Internal Server Error', error: error});
-});
+if (app.get('env') !== 'development') {
+  app.use(function(error, req, res, next) {
+      res.status(500);
+     res.render('500', {title:'500 Internal Server Error', error: error});
+  });
+}
 
 var server = app.listen(process.env.PORT || 4000, function() {
   var host = server.address().address;
