@@ -21,14 +21,6 @@ app.use(function(req,res,next){
   res.locals.session = req.session;
   next();
 });
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    title: "Error",
-    message: err.message,
-    error: {}
-  });
-});
 
 app.get('/', function (req, res) {
   res.render('index', {title: 'Tiger Clubs'});
@@ -287,6 +279,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   var clubID = parseInt(req.params.id);
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
+  console.log(clubID);
   var clubData = clubsJSON[clubID];
   var leaders = [];
   for (var i = 0; i < clubData["leaders"].length; i++) {
@@ -351,8 +344,14 @@ app.put('/clubs/:id/request',function(req,res) {
 
 });
 
-app.use(function(req, res, next){
-  res.status(404).render('404', {title: "404 Not Found"});
+app.use(function(req, res) {
+    res.status(400);
+   res.render('404', {title: '404 File Not Found'});
+});
+
+app.use(function(error, req, res, next) {
+    res.status(500);
+   res.render('500', {title:'500 Internal Server Error', error: error});
 });
 
 var server = app.listen(process.env.PORT || 4000, function() {
