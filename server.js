@@ -286,6 +286,16 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
   }
   clubData["leaders"] = leaders;
+  
+  for(var i = 0; i < clubData["announcements"].length; i++) {
+    var a = userJSON[clubData["announcements"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["announcements"][i]["authorID"]]["lastName"];
+    clubData["announcements"][i]["authorID"] = a;
+  }
+
+  for(var i = 0; i < clubData["events"].length; i++) {
+    var a = userJSON[clubData["events"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["events"][i]["authorID"]]["lastName"];
+    clubData["events"][i]["authorID"] = a;
+  }
   /*
   for (var i = 0; i < clubData["members"].length; i++) {
     members.push(userJSON[clubData["members"][i]]["firstName"]+" "+userJSON[clubData["members"][i]]["lastName"])

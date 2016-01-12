@@ -17,7 +17,20 @@
 
 		}
 	],
-	"events":[],
+	"events":[
+		{
+			"id":0,
+			"clubID":0,
+			"name":"Event",
+			"description":"This is an event",
+			"authorID":0,
+			"postDate": "Tue January 12, 2016",
+			"location":"Obernauer",
+			"time":"2:25, Tue January 12, 2016",
+			"type":"Meeting"
+		}
+
+	],
 	"link":[]
 	},
 		{
