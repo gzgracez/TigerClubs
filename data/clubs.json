@@ -3,7 +3,7 @@
 	"id":0,
 	"clubname":"Club0",
 	"description":"A club0",
-	"advisorID":[1],
+	"advisorID":[2],
 	"leaders":[0,1],
 	"requests":[],
 	"announcements":[
