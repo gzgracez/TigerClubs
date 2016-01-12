@@ -1,37 +1,50 @@
 <% include ../header %>
-<p><strong>Description: </strong><%= club["description"] %></p>
-<p><strong>Advisor: </strong><%= club["Advisor"] %></p>
-<p><strong>Leaders: </strong></p>
-	<% for(i = 0; i < club["leaders"].length; i++) {%>
-		<p><%=club["leaders"][i]%></p>
-	<%}%>
-<table class="table table-striped table-hover">
-<thead>
-  <tr>
-    <th>Announcement</th>
-    <th>Description</th>
-    <th>Author</th>
-    <th>Date</th>
-  </tr>
-</thead>
-<tbody>
-  <% for(var i = 0; i < club["announcements"].length; i++) {%>
+  <p><strong>Description: </strong><%= club["description"] %></p>
+  <p><strong>Advisor: </strong><%= club["Advisor"] %></p>
+  <p><strong>Leaders: </strong>
+  	<% for(i = 0; i < club["leaders"].length; i++) {%>
+      <% if (i != (club["leaders"].length - 1)) {%>
+    		<%=club["leaders"][i]%>,
+      <%} else {%>
+        <%=club["leaders"][i]%>
+      <%}%>
+  	<%}%>
+    </p>
+  <input type="filepicker" data-fp-apikey="Ax5haFujiQXm6yABGRnBtz" onchange="alert(event.fpfile.url)">
+  
+  <table class="table table-striped table-hover">
+  <thead>
     <tr>
-        <td>
-          <%= club["announcements"][i]["name"] %>
-        </td>
-        <td>
-          <%= club["announcements"][i]["description"] %>
-        </td>
-        <td>
-          <%= club["announcements"][i]["authorID"] %>
-        </td>
-         <td>
-          <%= club["announcements"][i]["postDate"] %>
-        </td>
-
+      <th>Announcement</th>
+      <th>Description</th>
+      <th>Author</th>
+      <th>Date</th>
     </tr>
-  <% } %>
-</tbody>
-</table>
-<% include ../footer %>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < club["announcements"].length; i++) {%>
+      <tr>
+          <td>
+            <%= club["announcements"][i]["name"] %>
+          </td>
+          <td>
+            <%= club["announcements"][i]["description"] %>
+          </td>
+          <td>
+            <%= club["announcements"][i]["authorID"] %>
+          </td>
+           <td>
+            <%= club["announcements"][i]["postDate"] %>
+          </td>
+
+      </tr>
+    <% } %>
+  </tbody>
+  </table>
+</div>
+</div>
+<script src="/static/js/jquery-2.1.4.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
+</body>
+</html>
