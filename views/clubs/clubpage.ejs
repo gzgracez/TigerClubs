@@ -10,7 +10,9 @@
       <%}%>
   	<%}%>
     </p>
-  <input type="filepicker" data-fp-apikey="Ax5haFujiQXm6yABGRnBtz" onchange="alert(event.fpfile.url)">
+  <form method="post" action="/uploadform/<%= club["id"] %>">
+    <input type="filepicker" data-fp-apikey="Ax5haFujiQXm6yABGRnBtz" id="formupload" name="formupload[form]" placeholder="Form"onchange="alert(event.fpfile.url)">
+  </form>
 
 <table class="table table-striped table-hover">
 <thead>

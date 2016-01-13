@@ -267,6 +267,16 @@ app.post('/leaveclub/:id',function(req,res) {
   res.redirect('/clubs');
 });
 
+app.post('/uploadform/:id',function(req,res) {
+  var clubID = parseInt(req.params.id);
+  var i = req.session.uid;
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  console.log(formupload.form)
+  var jsonString = JSON.stringify(userJSON, null, 2);
+  fs.writeFile("data/clubs.json", jsonString);
+});
+
 
 app.post('/clubs',function(req,res) {
 
