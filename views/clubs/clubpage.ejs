@@ -21,6 +21,7 @@
     <th>Description</th>
     <th>Author</th>
     <th>Date</th>
+    <th></th>
   </tr>
 </thead>
 <tbody>
@@ -38,7 +39,8 @@
          <td>
           <%= club["events"][i]["postDate"] %>
         </td>
-
+        <td><a href="clubpage/<%=club["id"]%>/eventedit/<%=club["events"][i]%>">Edit</a></td>
+</td>
     </tr>
   <% } %>
 </tbody>
