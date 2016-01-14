@@ -315,6 +315,28 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
 });
 
+app.put('clubpage/:id/editevent/:eid') {
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+
+  var clubID = parseInt(req.params.id);
+  var eventID = parseInt(req.params.eid);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  console.log(clubID);
+  var clubData = clubsJSON[clubID];
+
+  for(var i = 0; i < clubData["events"].length; i++) {
+    var a = userJSON[clubData["events"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["events"][i]["authorID"]]["lastName"];
+    clubData["events"][i]["authorID"] = a;
+  }
+
+  var eventData = clubData["events"][eventID];
+
+  res.render('clubs/editevent', title: eventData["title"], event: eventData);
+
+});
+
 app.get('/clubs/:id',function(req,res) {
   
 });
