@@ -315,7 +315,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
 });
 
-app.put('clubpage/:id/editevent/:eid') {
+app.put('clubpage/:id/editevent/:eid', function(req,res) {
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
 
