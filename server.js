@@ -333,7 +333,7 @@ app.put('clubpage/:id/editevent/:eid', function(req,res) {
 
   var eventData = clubData["events"][eventID];
 
-  res.render('clubs/editevent', title: eventData["title"], event: eventData);
+  res.render('clubs/editevent', {title: eventData["title"], event: eventData});
 
 });
 
