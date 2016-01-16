@@ -201,7 +201,7 @@ app.get('/allusers',function(req,res) {
   else if (req.session.user.userType == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
     var userJSON = JSON.parse(users);
-    res.render('allusers', {title: 'All Users', users: userJSON});
+    res.render('account/allusers', {title: 'All Users', users: userJSON});
   }
   else {
     res.render('notLoggedInAdmin', {title: 'All Users'});
