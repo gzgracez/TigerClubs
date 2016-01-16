@@ -23,7 +23,10 @@ app.use(function(req,res,next){
 });
 
 app.get('/', function (req, res) {
-  if (req.session.user.userType == "admin") {
+  if (!req.session.user) {
+    res.render('index', {title: 'Tiger Clubs'});
+  }
+  else if (req.session.user.userType == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
     var userJSON = JSON.parse(users);
     res.render('index', {title: 'Tiger Clubs', users: userJSON});
