@@ -9,24 +9,16 @@
     </tr>
   </thead>
   <tbody>
-    <% for(var i = 0; i < clubs.length; i++) {%>
+    <% for(var i = 0; i < users.length; i++) {%>
       <tr>
           <td>
-            <%= clubs[i]["clubname"] %>
+            <%= users[i]["firstName"] %> <%= users[i]["lastName"] %>
           </td>
           <td>
-            <%= clubs[i]["description"] %>
+            <%= users[i]["username"] %>
           </td>
           <td>
-            <% if (user["clubs_member"].indexOf(clubs[i]["id"]) > -1){ %>
-              <p>Club Member</p>
-            <% } else if (user["clubs_leader"].indexOf(clubs[i]["id"]) > -1){ %>
-              <p>Club Leader</p>
-            <% } else { %>
-              <form method="post" action="/joinclub/<%= clubs[i]["id"] %>">
-                <input class="btn btn-primary" class="form-control" type="submit" value="Join">
-              </form>
-            <% } %>
+            <%= users[i]["userType"] %>
           </td>
       </tr>
     <% } %>

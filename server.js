@@ -23,7 +23,14 @@ app.use(function(req,res,next){
 });
 
 app.get('/', function (req, res) {
-  res.render('index', {title: 'Tiger Clubs'});
+  if (req.session.user.userType == "admin") {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    res.render('index', {title: 'Tiger Clubs', users: userJSON});
+  }
+  else {
+    res.render('index', {title: 'Tiger Clubs'});
+  }
 });
 
 app.get('/dashboard', function (req, res) {
