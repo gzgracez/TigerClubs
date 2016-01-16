@@ -37,8 +37,20 @@ app.get('/', function (req, res) {
 });
 
 app.get('/dashboard', function (req, res) {
-  if (req.session.user)
-    res.render('dashboard', {title: 'My Dashboard'});
+  if (req.session.user) {
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    var allClubs = [];
+    for (var i = 0; i < clubsJSON.length; i++) {
+      var temp = {
+        "id": clubsJSON[i]["id"],
+        "clubname": clubsJSON[i]["clubname"],
+        "description": clubsJSON[i]["description"]
+      };
+      allClubs.push(temp);
+    }
+    res.render('dashboard', {title: 'My Dashboard', clubs: allClubs});
+  }
   else
     res.render('notLoggedIn', {title: 'My Dashboard'});
 });
