@@ -49,6 +49,7 @@ app.get('/dashboard', function (req, res) {
       };
       allClubs.push(temp);
     }
+    req.session.returnTo = req.path;
     res.render('dashboard', {title: 'My Dashboard', clubs: allClubs});
   }
   else
@@ -261,6 +262,7 @@ app.get('/clubs',function(req,res) {
       };
       allClubs.push(temp);
     }
+    req.session.returnTo = req.path;
     res.render('clubs/clubs', {title: 'My Clubs', clubs: allClubs});
   }
   else
@@ -289,7 +291,8 @@ app.post('/leaveclub/:id',function(req,res) {
   req.session.user = userJSON[i];
   var jsonString = JSON.stringify(userJSON, null, 2);
   fs.writeFile("data/users.json", jsonString);
-  res.redirect('/clubs');
+  res.redirect(req.session.returnTo || '/clubs');
+  delete req.session.returnTo;
 });
 
 app.post('/uploadform/:id',function(req,res) {
