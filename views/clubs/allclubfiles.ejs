@@ -5,6 +5,7 @@
     <thead>
       <tr>
         <th>Student</th>
+        <th>Email</th>
         <th>Form</th>
         <th></th>
       </tr>
@@ -12,12 +13,9 @@
     <tbody>
       <% for(var i = 0; i < club["links"].length; i++) {%>
         <tr>
-            <td>
-              <%= club["links"][i]["userID"] %>
-            </td>
-            <td>
-              <%= club["links"][i]["link"] %>
-            </td>
+            <td><%= club["links"][i]["fullname"] %></td>
+            <td><%= club["links"][i]["email"] %></td>
+            <td><p><a href="<%= club["links"][i]["link"] %>" target="_blank">View Upload</p></td>
         </tr>
       <% } %>
     </tbody>

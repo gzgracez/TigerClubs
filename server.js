@@ -299,13 +299,17 @@ app.post('/leaveclub/:id',function(req,res) {
 
 app.post('/uploadform/:id',function(req,res) {
   if (req.session.user) {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
     var clubID = parseInt(req.params.id);
     var i = req.session.uid;
     var clubs = fs.readFileSync('data/clubs.json', 'utf8');
     var clubsJSON = JSON.parse(clubs);
     var tempLink = {
       "link": req.body.formupload.formurl,
-      "userID": i
+      "userID": i,
+      "fullname": userJSON[i].firstName + " " + userJSON[i].lastName,
+      "email": userJSON[i].email
     };
     clubsJSON[clubID]["links"].push(tempLink);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
