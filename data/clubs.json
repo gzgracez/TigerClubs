@@ -1,47 +1,59 @@
 [
-	{
-	"id":0,
-	"clubname":"Club0",
-	"description":"A club0",
-	"advisorID":[2],
-	"leaders":[0,1],
-	"requests":[],
-	"announcements":[
-		{
-			"id":0,
-			"clubID":0,
-			"name":"Announcement",
-			"description":"This is an announcement",
-			"authorID":0,
-			"postDate": "Fri January 8, 2016"
-
-		}
-	],
-	"events":[
-		{
-			"id":0,
-			"clubID":0,
-			"name":"Event",
-			"description":"This is an event",
-			"authorID":0,
-			"postDate": "Tue January 12, 2016",
-			"location":"Obernauer",
-			"time":"2:25, Tue January 12, 2016",
-			"type":"Meeting"
-		}
-
-	],
-	"link":[]
-	},
-		{
-	"id":1,
-	"clubname":"Club1",
-	"description":"A club1",
-	"advisorID":[1],
-	"leaders":[0],
-	"requests":[],
-	"announcements":[],
-	"events":[],
-	"link":[]
-	}
+  {
+    "id": 0,
+    "clubname": "Club0",
+    "description": "A club0",
+    "advisorID": [
+      2
+    ],
+    "leaders": [
+      0,
+      1
+    ],
+    "requests": [],
+    "announcements": [
+      {
+        "id": 0,
+        "clubID": 0,
+        "name": "Announcement",
+        "description": "This is an announcement",
+        "authorID": 0,
+        "postDate": "Fri January 8, 2016"
+      }
+    ],
+    "events": [
+      {
+        "id": 0,
+        "clubID": 0,
+        "name": "Event",
+        "description": "This is an event",
+        "authorID": 0,
+        "postDate": "Tue January 12, 2016",
+        "location": "Obernauer",
+        "time": "2:25, Tue January 12, 2016",
+        "type": "Meeting"
+      }
+    ],
+    "links": [
+      {
+        "link": "https://cdn.filestackcontent.com/gCEaI7BJTUObTHuX3dNz",
+        "userID": 4
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "clubname": "Club1",
+    "description": "A club1",
+    "advisorID": [
+      1
+    ],
+    "leaders": [
+      0
+    ],
+    "requests": [],
+    "announcements": [],
+    "events": [],
+    "links": []
+  }
 ]
