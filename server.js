@@ -327,7 +327,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     var clubID = parseInt(req.params.id);
     var clubs = fs.readFileSync('data/clubs.json', 'utf8');
     var clubsJSON = JSON.parse(clubs);
-    console.log(clubID);
+    // console.log(clubID);
     var clubData = clubsJSON[clubID];
     var leaders = [];
     for (var i = 0; i < clubData["leaders"].length; i++) {
