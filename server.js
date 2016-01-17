@@ -296,13 +296,22 @@ app.post('/leaveclub/:id',function(req,res) {
 });
 
 app.post('/uploadform/:id',function(req,res) {
-  var clubID = parseInt(req.params.id);
-  var i = req.session.uid;
-  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
-  var clubsJSON = JSON.parse(clubs);
-  console.log(formupload.form)
-  var jsonString = JSON.stringify(userJSON, null, 2);
-  fs.writeFile("data/clubs.json", jsonString);
+  if (req.session.user) {
+    var clubID = parseInt(req.params.id);
+    var i = req.session.uid;
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    var tempLink = {
+      "link": req.body.formupload.formurl,
+      "userID": i
+    };
+    console.log(tempLink);
+    clubsJSON[clubID]["links"].push(tempLink);
+    var jsonString = JSON.stringify(clubsJSON, null, 2);
+    fs.writeFile("data/clubs.json", jsonString);
+    res.redirect(req.session.returnTo || '/clubs');
+    delete req.session.returnTo;
+  }
 });
 
 
@@ -311,36 +320,42 @@ app.post('/clubs',function(req,res) {
 });
 
 app.get('/clubpage/:id', function(req,res) {//1st route
-  var users = fs.readFileSync('data/users.json', 'utf8');
-  var userJSON = JSON.parse(users);
+  if (req.session.user) {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
 
-  var clubID = parseInt(req.params.id);
-  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
-  var clubsJSON = JSON.parse(clubs);
-  console.log(clubID);
-  var clubData = clubsJSON[clubID];
-  var leaders = [];
-  for (var i = 0; i < clubData["leaders"].length; i++) {
-    leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
-  }
-  clubData["leaders"] = leaders;
-  
-  for(var i = 0; i < clubData["announcements"].length; i++) {
-    var a = userJSON[clubData["announcements"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["announcements"][i]["authorID"]]["lastName"];
-    clubData["announcements"][i]["authorID"] = a;
-  }
+    var clubID = parseInt(req.params.id);
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    console.log(clubID);
+    var clubData = clubsJSON[clubID];
+    var leaders = [];
+    for (var i = 0; i < clubData["leaders"].length; i++) {
+      leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
+    }
+    clubData["leaders"] = leaders;
+    
+    for(var i = 0; i < clubData["announcements"].length; i++) {
+      var a = userJSON[clubData["announcements"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["announcements"][i]["authorID"]]["lastName"];
+      clubData["announcements"][i]["authorID"] = a;
+    }
 
-  for(var i = 0; i < clubData["events"].length; i++) {
-    var a = userJSON[clubData["events"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["events"][i]["authorID"]]["lastName"];
-    clubData["events"][i]["authorID"] = a;
+    for(var i = 0; i < clubData["events"].length; i++) {
+      var a = userJSON[clubData["events"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["events"][i]["authorID"]]["lastName"];
+      clubData["events"][i]["authorID"] = a;
+    }
+    /*
+    for (var i = 0; i < clubData["members"].length; i++) {
+      members.push(userJSON[clubData["members"][i]]["firstName"]+" "+userJSON[clubData["members"][i]]["lastName"])
+    }
+    */
+    //DO WE WANT MEMBERS LISTED
+    req.session.returnTo = req.path;
+    res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
   }
-  /*
-  for (var i = 0; i < clubData["members"].length; i++) {
-    members.push(userJSON[clubData["members"][i]]["firstName"]+" "+userJSON[clubData["members"][i]]["lastName"])
+  else {
+    res.render('notLoggedIn', {title: 'Club Page'});
   }
-  */
-  //DO WE WANT MEMBERS LISTED
-  res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
 });
 
 app.get('editevent/:id/:eid', function(req,res) {
