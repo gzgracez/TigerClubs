@@ -314,6 +314,21 @@ app.post('/uploadform/:id',function(req,res) {
   }
 });
 
+app.get('/files/:id', function(req,res) {
+  if (!req.session.user) {
+    res.render('notLoggedInAdmin', {title: 'My Clubs'});
+  }
+  else {
+    if (req.session.user.userType == "admin") {
+      var clubID = parseInt(req.params.id);
+      var i = req.session.uid;
+      var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+      var clubsJSON = JSON.parse(clubs);
+      var club = clubsJSON[clubID];
+      res.render('clubs/allclubfiles', {title: club["clubname"] + ' Files', club: club});
+    }
+  }
+});
 
 app.post('/clubs',function(req,res) {
 
