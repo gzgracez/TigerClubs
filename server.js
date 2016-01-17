@@ -243,6 +243,7 @@ app.get('/allclubs',function(req,res) {
       "clubs_member": userJSON[req.session.uid]["clubs_member"],
       "clubs_leader": userJSON[req.session.uid]["clubs_leader"]
     }
+    req.session.returnTo = req.path;
     res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs, user: user});
   }
   else
@@ -278,7 +279,8 @@ app.post('/joinclub/:id',function(req,res) {
   req.session.user = userJSON[i];
   var jsonString = JSON.stringify(userJSON, null, 2);
   fs.writeFile("data/users.json", jsonString);
-  res.redirect('/clubs');
+  res.redirect(req.session.returnTo || '/clubs');
+  delete req.session.returnTo;
 });
 
 app.post('/leaveclub/:id',function(req,res) {
