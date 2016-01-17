@@ -27,12 +27,15 @@
   <% } else if (session.user.userType == "admin") { %>
     <h2>Welcome, <%= session.user.firstName %> <%= session.user.lastName %>!</h2>
     <p>Click <a href="/allusers">here</a> to view all users.</p>
+    <p>Click <a href="/dashboard">here</a> to view your dashboard.</p>
 
   <% } else if (session.user.userType == "advisor") { %>
     <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
-    <p>Click <a href="/allusers">here</a> to view all users.</p>
+    <p>Click <a href="/dashboard">here</a> to view your dashboard.</p>
+    <!-- <p>Click <a href="/allusers">here</a> to view all users.</p> -->
 
   <% } else { %>
     <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
+    <p>Click <a href="/dashboard">here</a> to view your dashboard.</p>
   <% } %>
 <% include footer %>

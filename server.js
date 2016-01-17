@@ -305,10 +305,10 @@ app.post('/uploadform/:id',function(req,res) {
       "link": req.body.formupload.formurl,
       "userID": i
     };
-    console.log(tempLink);
     clubsJSON[clubID]["links"].push(tempLink);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
     fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "File uploaded successfully");
     res.redirect(req.session.returnTo || '/clubs');
     delete req.session.returnTo;
   }

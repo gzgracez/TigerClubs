@@ -81,5 +81,16 @@
     "email": "test2@test.com",
     "clubs_member": [],
     "clubs_leader": []
+  },
+  {
+    "id": 6,
+    "userType": "advisor",
+    "username": "advisor",
+    "password": "advisor",
+    "firstName": "Ad",
+    "lastName": "Visor",
+    "email": "advisor@test.com",
+    "clubs_member": [],
+    "clubs_leader": []
   }
 ]

@@ -1,4 +1,10 @@
 <% include ../header %>
+  <% if(messages.notification){ %>
+    <div class="alert alert-success" id="placeholderSuccess" role="alert">
+      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+    </div>
+  <% } %>
+  
   <p><strong>Description: </strong><%= club["description"] %></p>
   <p><strong>Advisor: </strong><%= club["Advisor"] %></p>
   <p><strong>Leaders: </strong>

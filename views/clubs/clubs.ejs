@@ -34,7 +34,7 @@
               <td><%= clubs[j]["description"] %></td>
               <td>
                 <form method="post" action="/leaveclub/<%= clubs[j]["id"] %>">
-                  <label>Club Member&nbsp;</label>
+                  <label id="clubmember">Club Member&nbsp;</label>
                   <input class="btn btn-primary" class="form-control" type="submit" value="Leave Club">
                 </form>
               </td>
