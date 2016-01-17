@@ -317,7 +317,6 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   var clubID = parseInt(req.params.id);
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
-  console.log(clubID);
   var clubData = clubsJSON[clubID];
   var leaders = [];
   for (var i = 0; i < clubData["leaders"].length; i++) {
@@ -343,7 +342,8 @@ app.get('/clubpage/:id', function(req,res) {//1st route
   res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
 });
 
-app.get('editevent/:id/:eid', function(req,res) {
+app.get('/editevent/:id/:eid', function(req,res,next) {
+
   var users = fs.readFileSync('data/users.json', 'utf8');
   var userJSON = JSON.parse(users);
 
@@ -364,6 +364,35 @@ app.get('editevent/:id/:eid', function(req,res) {
   res.render('clubs/editevent', {title: eventData["title"], event: eventData});
 
 });
+
+app.put('/editevent/:id/:eid', function(req,res,next) {
+  var clubID = parseInt(req.params.id);
+  var eventID = parseInt(req.params.eid);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  
+
+  var eventData = {
+    "id":eventID,
+    "clubID":clubID,
+    "name":req.body.event.name,
+    "description":req.body.event.description,
+    "authorID":req.session.uid,
+    "postDate": req.body.event.postDate,
+    "location":req.body.event.location,
+    "time":req.body.event.time,
+    "type":req.body.event.type
+  }
+
+  clubJSON["clubID"]["events"]["eventID"] = eventData
+
+  var jsonString = JSON.stringify(clubJSON, null, 2);
+  fs.writeFile("data/clubs.json", jsonString);
+  req.flash("notification", "Event Edited");
+  res.redirect('/clubpage/'+clubID);
+
+
+})
 
 app.get('/clubs/:id',function(req,res) {
   
