@@ -23,7 +23,7 @@
               <% if(session.user.userType == "admin"){ %>
                 <td>
                   <% if(members[i]["type"] == "Club Member"){ %>
-                    <form method="post" action="/deletemember/<%= club["id"] %>/<%= members["uid"] %>">
+                    <form method="post" action="/deletemember/<%= club["id"] %>/<%= members[i]["uid"] %>">
                     <input class="btn btn-danger" class="form-control" type="submit" value="Remove">
                     </form>
                   <% } %>

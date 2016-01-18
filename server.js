@@ -385,9 +385,25 @@ app.get('/roster/:id', function(req,res) {
         members.push(tempUser);
       }
     }
-    // go through all users and compile club members
     var club = clubsJSON[clubID];
+    req.session.returnTo = req.path;
     res.render('clubs/roster', {title: club["clubname"] + ' Roster', club: club, members: members});
+  }
+});
+
+app.post('/deletemember/:cid/:uid',function(req,res) {
+  if (req.session.user) {
+    var clubID = parseInt(req.params.cid);
+    var userID = parseInt(req.params.uid);
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    var tempIndex = userJSON[userID]["clubs_member"].indexOf(clubID);
+    userJSON[userID]["clubs_member"].splice(tempIndex,1);
+    var jsonString = JSON.stringify(userJSON, null, 2);
+    fs.writeFile("data/users.json", jsonString);
+    req.flash("notification", "Club member deleted successfully");
+    res.redirect(req.session.returnTo || '/clubs');
+    delete req.session.returnTo;
   }
 });
 

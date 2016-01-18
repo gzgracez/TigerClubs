@@ -50,9 +50,7 @@
     "firstName": "studentFirstName",
     "lastName": "studentLastName",
     "email": "student@email.com",
-    "clubs_member": [
-      0
-    ],
+    "clubs_member": [],
     "clubs_leader": [
       0
     ]
@@ -66,8 +64,8 @@
     "lastName": "IngEDIT",
     "email": "test@test.com",
     "clubs_member": [
-      0,
-      1
+      1,
+      0
     ],
     "clubs_leader": []
   },
