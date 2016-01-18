@@ -320,6 +320,21 @@ app.post('/uploadform/:id',function(req,res) {
   }
 });
 
+app.post('/deletefile/:cid/:fid',function(req,res) {
+  if (req.session.user) {
+    var clubID = parseInt(req.params.cid);
+    var fileID = parseInt(req.params.fid);
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    clubsJSON[clubID]["links"].splice(fileID,1);
+    var jsonString = JSON.stringify(clubsJSON, null, 2);
+    fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "File deleted successfully");
+    res.redirect(req.session.returnTo || '/clubs');
+    delete req.session.returnTo;
+  }
+});
+
 app.get('/files/:id', function(req,res) {
   if (!req.session.user) {
     res.render('notLoggedInAdmin', {title: 'My Clubs'});
@@ -331,6 +346,7 @@ app.get('/files/:id', function(req,res) {
       var clubs = fs.readFileSync('data/clubs.json', 'utf8');
       var clubsJSON = JSON.parse(clubs);
       var club = clubsJSON[clubID];
+      req.session.returnTo = req.path;
       res.render('clubs/allclubfiles', {title: club["clubname"] + ' Files', club: club});
     }
   }
