@@ -18,7 +18,7 @@
               <td><%= members[i]["fullname"] %></td>
               <td><%= members[i]["username"] %></td>
               <td>
-                <a href="mailto:<%= members[i]["email"] %>" target="_blank"><%= members[i]["email"] %></a>
+                <a href="mailto:<%= members[i]["email"] %>"><%= members[i]["email"] %></a>
               </td>
               <% if(session.user.userType == "admin"){ %>
                 <td>
