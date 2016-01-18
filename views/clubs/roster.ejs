@@ -1,0 +1,39 @@
+<% include ../header %>
+  <% if(members.length > 0){ %>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Username</th>
+          <th>Email</th>
+          <% if(session.user.userType == "admin"){ %>
+            <th>Remove</th>
+          <% } %>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < members.length; i++) {%>
+          <tr>
+              <td><%= members[i]["fullname"] %></td>
+              <td><%= members[i]["username"] %></td>
+              <td>
+                <a href="mailto:<%= members[i]["email"] %>" target="_blank"><%= members[i]["email"] %></a>
+              </td>
+              <% if(session.user.userType == "admin"){ %>
+                <td>
+                  <% if(members[i]["type"] == "Club Member"){ %>
+                    <form method="post" action="/deletemember/<%= club["id"] %>/<%= members["uid"] %>">
+                    <input class="btn btn-danger" class="form-control" type="submit" value="Remove">
+                    </form>
+                  <% } %>
+                </td>
+              <% } %>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p><%= club["clubname"] %> does not currently have any uploaded files!</p>
+  <% } %>
+<% include ../footer %>

@@ -5,34 +5,34 @@
     </div>
   <% } %>
   
-<% if(club["links"].length > 0){ %>
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Student</th>
-        <th>Email</th>
-        <th>Form</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(var i = 0; i < club["links"].length; i++) {%>
+  <% if(club["links"].length > 0){ %>
+    <table class="table table-striped table-hover">
+      <thead>
         <tr>
-            <td><%= club["links"][i]["fullname"] %></td>
-            <td><%= club["links"][i]["email"] %></td>
-            <td>
-              
-              <form method="post" action="/deletefile/<%= club["id"] %>/<%= i %>">
-                <label class="clubmember"><a href="<%= club["links"][i]["link"] %>" target="_blank">View Upload</a>&nbsp;</label>
-                <input class="btn btn-primary" class="form-control" type="submit" value="Delete">
-              </form>
-            </td>
+          <th>Student</th>
+          <th>Email</th>
+          <th>Form</th>
+          <th></th>
         </tr>
-      <% } %>
-    </tbody>
-  </table>
-<% } else { %>
-  <p><%= club["clubname"] %> does not currently have any uploaded files!</p>
-<% } %>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < club["links"].length; i++) {%>
+          <tr>
+              <td><%= club["links"][i]["fullname"] %></td>
+              <td><%= club["links"][i]["email"] %></td>
+              <td>
+                
+                <form method="post" action="/deletefile/<%= club["id"] %>/<%= i %>">
+                  <label class="clubmember"><a href="<%= club["links"][i]["link"] %>" target="_blank">View Upload</a>&nbsp;</label>
+                  <input class="btn btn-primary" class="form-control" type="submit" value="Delete">
+                </form>
+              </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p><%= club["clubname"] %> does not currently have any uploaded files!</p>
+  <% } %>
 
 <% include ../footer %>
