@@ -133,10 +133,6 @@ form{
   }
 }
 
-#clubmember {
-  font-weight: normal;
-}
-
 label#ansLabels {
   float: inherit;
   font-weight: 300;
@@ -229,4 +225,12 @@ label#ansLabels {
 
 #roster {
   text-decoration: none;
+}
+
+.nounderline {
+  text-decoration: none;
+}
+
+.clubmember {
+  font-weight: normal;
 }
