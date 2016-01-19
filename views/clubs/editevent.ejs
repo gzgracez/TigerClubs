@@ -6,9 +6,9 @@
   </div>
 <% } %>
 
-<form method="put" action=<%="/editevent/"+event.clubID+"/"+event.id%>>
+<form method="post" action=<%="/editevent/"+event.clubID+"/"+event.id%>>
   <label for="title">Title:</label>
-  <input type="text" name="event[title]" value="<%= event.name %>" placeholder="Title" class="form-control" required><br>
+  <input type="text" name="event[name]" value="<%= event.name %>" placeholder="Title" class="form-control" required><br>
 
   <label for="description">Description:</label>
   <input type="text" name="event[description]" value="<%= event.description %>" placeholder="Description" class="form-control" required><br>

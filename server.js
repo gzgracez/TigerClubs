@@ -492,9 +492,9 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
     "type":req.body.event.type
   }
 
-  clubJSON[clubID]["events"][eventID] = eventData
+  clubsJSON[clubID]["events"][eventID] = eventData
 
-  var jsonString = JSON.stringify(clubJSON, null, 2);
+  var jsonString = JSON.stringify(clubsJSON, null, 2);
   fs.writeFile("data/clubs.json", jsonString);
   req.flash("notification", "Event Edited");
   res.redirect('/clubpage/'+clubID);
