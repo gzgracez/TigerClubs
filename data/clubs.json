@@ -36,8 +36,10 @@
     ],
     "links": [
       {
-        "link": "https://cdn.filestackcontent.com/gCEaI7BJTUObTHuX3dNz",
-        "userID": 4
+        "link": "https://cdn.filestackcontent.com/acWmil4LRmbda35SQugo",
+        "userID": 0,
+        "fullname": "Ad Min1",
+        "email": "student@email.com"
       }
     ]
   },
@@ -46,7 +48,7 @@
     "clubname": "Club1",
     "description": "A club1",
     "advisorID": [
-      1
+      6
     ],
     "leaders": [
       0

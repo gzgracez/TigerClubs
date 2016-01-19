@@ -19,7 +19,10 @@
           </td>
           <td>
             <% if (user["clubs_member"].indexOf(clubs[i]["id"]) > -1){ %>
-              <p>Club Member</p>
+              <form method="post" action="/leaveclub/<%= clubs[i]["id"] %>">
+                <label class="clubmember">Club Member&nbsp;</label>
+                <input class="btn btn-primary" class="form-control" type="submit" value="Leave Club">
+              </form>
             <% } else if (user["clubs_leader"].indexOf(clubs[i]["id"]) > -1){ %>
               <p>Club Leader</p>
             <% } else { %>

@@ -243,6 +243,7 @@ app.get('/allclubs',function(req,res) {
       "clubs_member": userJSON[req.session.uid]["clubs_member"],
       "clubs_leader": userJSON[req.session.uid]["clubs_leader"]
     }
+    req.session.returnTo = req.path;
     res.render('clubs/allclubs', {title: 'All Clubs', clubs: allClubs, user: user});
   }
   else
@@ -278,7 +279,8 @@ app.post('/joinclub/:id',function(req,res) {
   req.session.user = userJSON[i];
   var jsonString = JSON.stringify(userJSON, null, 2);
   fs.writeFile("data/users.json", jsonString);
-  res.redirect('/clubs');
+  res.redirect(req.session.returnTo || '/clubs');
+  delete req.session.returnTo;
 });
 
 app.post('/leaveclub/:id',function(req,res) {
@@ -297,23 +299,113 @@ app.post('/leaveclub/:id',function(req,res) {
 
 app.post('/uploadform/:id',function(req,res) {
   if (req.session.user) {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
     var clubID = parseInt(req.params.id);
     var i = req.session.uid;
     var clubs = fs.readFileSync('data/clubs.json', 'utf8');
     var clubsJSON = JSON.parse(clubs);
     var tempLink = {
       "link": req.body.formupload.formurl,
-      "userID": i
+      "userID": i,
+      "fullname": userJSON[i].firstName + " " + userJSON[i].lastName,
+      "email": userJSON[i].email
     };
-    console.log(tempLink);
     clubsJSON[clubID]["links"].push(tempLink);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
     fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "File uploaded successfully");
     res.redirect(req.session.returnTo || '/clubs');
     delete req.session.returnTo;
   }
 });
 
+app.post('/deletefile/:cid/:fid',function(req,res) {
+  if (req.session.user) {
+    var clubID = parseInt(req.params.cid);
+    var fileID = parseInt(req.params.fid);
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    clubsJSON[clubID]["links"].splice(fileID,1);
+    var jsonString = JSON.stringify(clubsJSON, null, 2);
+    fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "File deleted successfully");
+    res.redirect(req.session.returnTo || '/clubs');
+    delete req.session.returnTo;
+  }
+});
+
+app.get('/files/:id', function(req,res) {
+  if (!req.session.user) {
+    res.render('notLoggedInAdmin', {title: 'Club Files'});
+  }
+  else {
+    if (req.session.user.userType == "admin") {
+      var clubID = parseInt(req.params.id);
+      var i = req.session.uid;
+      var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+      var clubsJSON = JSON.parse(clubs);
+      var club = clubsJSON[clubID];
+      req.session.returnTo = req.path;
+      res.render('clubs/allclubfiles', {title: club["clubname"] + ' Files', club: club});
+    }
+  }
+});
+
+app.get('/roster/:id', function(req,res) {
+  if (!req.session.user) {
+    res.render('notLoggedInAdmin', {title: 'Club Roster'});
+  }
+  else {
+    var clubID = parseInt(req.params.id);
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    var members = [];
+    for (var i = 0; i < userJSON.length; i++) {
+      if (userJSON[i]["clubs_member"].indexOf(clubID) > -1) {
+        var tempUser = {
+          "fullname": userJSON[i]["firstName"] + " " + userJSON[i]["lastName"],
+          "username": userJSON[i]["username"],
+          "email": userJSON[i]["email"],
+          "type": "Club Member",
+          "uid": userJSON[i]["id"]
+        }
+        members.push(tempUser);
+      }
+      else if (userJSON[i]["clubs_leader"].indexOf(clubID) > -1) {
+        var tempUser = {
+          "fullname": userJSON[i]["firstName"] + " " + userJSON[i]["lastName"],
+          "username": userJSON[i]["username"],
+          "email": userJSON[i]["email"],
+          "type": "Club Leader",
+          "uid": userJSON[i]["id"]
+        }
+        members.push(tempUser);
+      }
+    }
+    var club = clubsJSON[clubID];
+    req.session.returnTo = req.path;
+    res.render('clubs/roster', {title: club["clubname"] + ' Roster', club: club, members: members});
+  }
+});
+
+app.post('/deletemember/:cid/:uid',function(req,res) {
+  if (req.session.user) {
+    var clubID = parseInt(req.params.cid);
+    var userID = parseInt(req.params.uid);
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    var tempIndex = userJSON[userID]["clubs_member"].indexOf(clubID);
+    userJSON[userID]["clubs_member"].splice(tempIndex,1);
+    var jsonString = JSON.stringify(userJSON, null, 2);
+    fs.writeFile("data/users.json", jsonString);
+    req.flash("notification", "Club member deleted successfully");
+    res.redirect(req.session.returnTo || '/clubs');
+    delete req.session.returnTo;
+  }
+});
 
 app.post('/clubs',function(req,res) {
 
@@ -327,7 +419,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     var clubID = parseInt(req.params.id);
     var clubs = fs.readFileSync('data/clubs.json', 'utf8');
     var clubsJSON = JSON.parse(clubs);
-    console.log(clubID);
+    // console.log(clubID);
     var clubData = clubsJSON[clubID];
     var leaders = [];
     for (var i = 0; i < clubData["leaders"].length; i++) {
