@@ -19,7 +19,7 @@
             <%= users[i]["username"] %>
           </td>
           <td>
-            <%= users[i]["email"] %>
+            <a href="mailto:<%= users[i]["email"] %>" class='usersTable'><%= users[i]["email"] %></a>
           </td>
           <td>
             <%= users[i]["userType"] %>
