@@ -550,6 +550,109 @@ app.post('/editannouncement/:id/:aid', function(req,res,next) {
 
 });
 
+app.get('/newevent/:id', function(req,res) {
+
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+
+  var clubID = parseInt(req.params.id); 
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  var clubData = clubsJSON[clubID];
+
+
+  var eventData = {
+    "id":clubData["events"].length,
+    "clubID":clubID,
+    "name":"",
+    "description":"",
+    "authorID":req.session.uid,
+    "postDate":"",
+    "location":"",
+    "time":"",
+    "type":""
+  }
+
+  res.render('clubs/newevent', {title: "New Event", event: eventData});
+
+});
+
+app.post('/newevent/:id', function(req,res) {
+  var clubID = parseInt(req.params.id);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  
+
+  var eventData = {
+    "id":eventID,
+    "clubID":clubID,
+    "name":req.body.event.name,
+    "description":req.body.event.description,
+    "authorID":req.session.uid,
+    "postDate": req.body.event.postDate,
+    "location":req.body.event.location,
+    "time":req.body.event.time,
+    "type":req.body.event.type
+  }
+
+  clubsJSON[clubID]["events"].push(eventData);
+
+  var jsonString = JSON.stringify(clubsJSON, null, 2);
+  fs.writeFile("data/clubs.json", jsonString);
+  req.flash("notification", "Event Edited");
+  res.redirect('/clubpage/'+clubID);
+
+
+});
+
+app.get('/newannouncement/:id', function(req,res) {
+
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+
+  var clubID = parseInt(req.params.id);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  console.log(clubID);
+  var clubData = clubsJSON[clubID];
+
+  var announcementData = {
+    "id":clubData["announcements"].length,
+    "clubID":clubID,
+    "name":"",
+    "description":"",
+    "authorID":req.session.uid,
+    "postDate": Date()  }
+
+  res.render('clubs/newannouncement', {title: "New Announcement", announcement: announcementData});
+
+});
+
+app.post('/editannouncement/:id/:aid', function(req,res) {
+  var clubID = parseInt(req.params.id);
+  var announcementID = parseInt(req.params.aid);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  
+
+  var announcementData = {
+    "id":announcementID,
+    "clubID":clubID,
+    "name":req.body.announcement.name,
+    "description":req.body.announcement.description,
+    "authorID":req.session.uid,
+    "postDate": Date()  }
+
+  clubsJSON[clubID]["announcements"].push(announcementData);
+
+  var jsonString = JSON.stringify(clubsJSON, null, 2);
+  fs.writeFile("data/clubs.json", jsonString);
+  req.flash("notification", "Announcement Edited");
+  res.redirect('/clubpage/'+clubID);
+
+
+});
+
 app.get('/clubs/:id',function(req,res) {
   
 });

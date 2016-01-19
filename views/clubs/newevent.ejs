@@ -1,0 +1,29 @@
+<% include ../header %>
+
+<% if(messages.notification){ %>
+  <div class="alert alert-danger" id="placeholderWarning" role="alert">
+    <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+  </div>
+<% } %>
+
+<form method="post" action=<%="/newevent/"+event.clubID%>>
+  <label for="title">Title:</label>
+  <input type="text" name="event[name]" value="<%= event.name %>" placeholder="Title" class="form-control" required><br>
+
+  <label for="description">Description:</label>
+  <input type="text" name="event[description]" value="<%= event.description %>" placeholder="Description" class="form-control" required><br>
+
+  <label for="location">Location:</label>
+  <input type="text" name="event[location]" value="<%= event.location %>" placeholder="Location" class="form-control" required><br>
+
+  <label for="time">Time</label>
+  <input type="text" name="event[time]" value="<%= event.time %>" placeholder="time" class="form-control" required><br>
+
+  <label for="type">Type</label>
+  <input type="text" name="event[type]" value="<%= event.type %>" placeholder="type" class="form-control" required><br>
+
+
+  <input class="btn btn-primary" class="form-control" type="submit" value="Update"><br><br>
+</form>
+
+<% include ../footer %>
