@@ -1,4 +1,10 @@
 <% include ../header %>
+  <% if(messages.notification){ %>
+    <div class="alert alert-success" id="placeholderSuccess" role="alert">
+      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+    </div>
+  <% } %>
+  
   <p><strong>Description: </strong><%= club["description"] %></p>
   <p><strong>Advisor: </strong><%= club["Advisor"] %></p>
   <p><strong>Leaders: </strong>
@@ -11,7 +17,11 @@
     <%}%>
     </p>
   <form method="post" action="/uploadform/<%= club["id"] %>">
-    <input class="btn btn-success" class="form-control" type="filepicker" data-fp-apikey="Ax5haFujiQXm6yABGRnBtz" id="formupload" name="formupload[formurl]" placeholder="Form"onchange='$("#formupload").val(event.fpfile.url);console.log($("#formupload").val());this.form.submit();'>
+    <input class="button btn btn-success" class="form-control" type="filepicker" data-fp-apikey="Ax5haFujiQXm6yABGRnBtz" id="formupload" name="formupload[formurl]" placeholder="Form"onchange='$("#formupload").val(event.fpfile.url);console.log($("#formupload").val());this.form.submit();'>
+    <a href="/roster/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Roster</a>
+    <% if (session.user.userType == "admin") { %>
+      <a href="/files/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Uploaded Files</a>
+    <% } %>
   </form>
 
 <table class="table table-striped table-hover">
