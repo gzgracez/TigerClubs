@@ -473,7 +473,7 @@ app.get('/editevent/:id/:eid', function(req,res,next) {
 
 });
 
-app.put('/editevent/:id/:eid', function(req,res,next) {
+app.post('/editevent/:id/:eid', function(req,res,next) {
   var clubID = parseInt(req.params.id);
   var eventID = parseInt(req.params.eid);
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
@@ -492,7 +492,7 @@ app.put('/editevent/:id/:eid', function(req,res,next) {
     "type":req.body.event.type
   }
 
-  clubJSON["clubID"]["events"]["eventID"] = eventData
+  clubJSON[clubID]["events"][eventID] = eventData
 
   var jsonString = JSON.stringify(clubJSON, null, 2);
   fs.writeFile("data/clubs.json", jsonString);
@@ -500,7 +500,55 @@ app.put('/editevent/:id/:eid', function(req,res,next) {
   res.redirect('/clubpage/'+clubID);
 
 
-})
+});
+
+app.get('/editannouncement/:id/:aid', function(req,res,next) {
+
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+
+  var clubID = parseInt(req.params.id);
+  var announcementID = parseInt(req.params.aid);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  console.log(clubID);
+  var clubData = clubsJSON[clubID];
+
+  for(var i = 0; i < clubData["announcements"].length; i++) {
+    var a = userJSON[clubData["announcements"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["announcements"][i]["authorID"]]["lastName"];
+    clubData["announcements"][i]["authorID"] = a;
+  }
+
+  var announcementData = clubData["announcements"][announcementID];
+
+  res.render('clubs/editannouncement', {title: announcementData["name"], announcement: announcementData});
+
+});
+
+app.post('/editannouncement/:id/:aid', function(req,res,next) {
+  var clubID = parseInt(req.params.id);
+  var announcementID = parseInt(req.params.aid);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  
+
+  var announcementData = {
+    "id":announcementID,
+    "clubID":clubID,
+    "name":req.body.announcement.name,
+    "description":req.body.announcement.description,
+    "authorID":req.session.uid,
+    "postDate": Date()  }
+
+  clubsJSON[clubID]["announcements"][announcementID] = announcementData
+
+  var jsonString = JSON.stringify(clubsJSON, null, 2);
+  fs.writeFile("data/clubs.json", jsonString);
+  req.flash("notification", "Announcement Edited");
+  res.redirect('/clubpage/'+clubID);
+
+
+});
 
 app.get('/clubs/:id',function(req,res) {
   

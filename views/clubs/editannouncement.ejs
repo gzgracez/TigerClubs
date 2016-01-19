@@ -1,0 +1,19 @@
+<% include ../header %>
+
+<% if(messages.notification){ %>
+  <div class="alert alert-danger" id="placeholderWarning" role="alert">
+    <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+  </div>
+<% } %>
+
+<form method="post" action=<%="/editannouncement/"+announcement.clubID+"/"+announcement.id%>>
+  <label for="title">Title:</label>
+  <input type="text" name="announcement[name]" value="<%= announcement.name %>" placeholder="Title" class="form-control" required><br>
+
+  <label for="description">Description:</label>
+  <input type="text" name="announcement[description]" value="<%= announcement.description %>" placeholder="Description" class="form-control" required><br>
+
+  <input class="btn btn-primary" class="form-control" type="submit" value="Update"><br><br>
+</form>
+
+<% include ../footer %>
