@@ -421,8 +421,14 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     var clubsJSON = JSON.parse(clubs);
     // console.log(clubID);
     var clubData = clubsJSON[clubID];
+
+    var leader = false;
+
     var leaders = [];
     for (var i = 0; i < clubData["leaders"].length; i++) {
+      if(req.session.uid = clubData["leaders"][i]]) {
+        leader = true;
+      }
       leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
     }
     clubData["leaders"] = leaders;
