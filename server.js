@@ -426,7 +426,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
 
     var leaders = [];
     for (var i = 0; i < clubData["leaders"].length; i++) {
-      if(req.session.uid = clubData["leaders"][i]]) {
+      if(req.session.uid = clubData["leaders"][i]) {
         leader = true;
       }
       leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
@@ -449,7 +449,7 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     */
     //DO WE WANT MEMBERS LISTED
     req.session.returnTo = req.path;
-    res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData});
+    res.render('clubs/clubpage', {title: clubData["clubname"], club: clubData, isLeader: leader});
   }
   else {
     res.render('notLoggedIn', {title: 'Club Page'});

@@ -53,7 +53,9 @@
          <td>
           <%= club["events"][i]["time"] %>
         </td>
+        <%if(isLeader) {%>
         <td><a href="/editevent/<%=club["id"]%>/<%=club["events"][i]["id"]%>">Edit</a></td>
+        <%}%>
 </td>
     </tr>
   <% } %>
@@ -83,8 +85,9 @@
            <td>
             <%= club["announcements"][i]["postDate"] %>
           </td>
+          <%if(isLeader) {%>
           <td><a href="/editannouncement/<%=club["id"]%>/<%=club["announcements"][i]["id"]%>">Edit</a></td>
-
+          <%}%>
       </tr>
     <% } %>
   </tbody>
