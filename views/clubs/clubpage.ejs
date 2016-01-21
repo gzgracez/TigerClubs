@@ -54,7 +54,12 @@
           <%= club["events"][i]["time"] %>
         </td>
         <%if(isLeader) {%>
-        <td><a href="/editevent/<%=club["id"]%>/<%=club["events"][i]["id"]%>">Edit</a></td>
+          <td><a href="/editevent/<%=club["id"]%>/<%=club["events"][i]["id"]%>">Edit</a></td>
+          <%if(club["events"][i]["visible"] == "true") {%>
+            <td>Visible</td>
+          <%} else {%>
+            <td>Hidden</td>
+          <%}%>
         <%}%>
 </td>
     </tr>
@@ -90,6 +95,11 @@
           </td>
           <%if(isLeader) {%>
           <td><a href="/editannouncement/<%=club["id"]%>/<%=club["announcements"][i]["id"]%>">Edit</a></td>
+          <%if(club["announcements"][i]["visible"] == "true") {%>
+            <td>Visible</td>
+          <%} else {%>
+            <td>Hidden</td>
+          <%}%>
           <%}%>
       </tr>
     <% } %>

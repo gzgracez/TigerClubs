@@ -485,7 +485,6 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
   
-
   var eventData = {
     "id":eventID,
     "clubID":clubID,
@@ -495,7 +494,8 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
     "postDate": req.body.event.postDate,
     "location":req.body.event.location,
     "time":req.body.event.time,
-    "type":req.body.event.type
+    "type":req.body.event.type,
+    "visible":req.body.event.visible
   }
 
   clubsJSON[clubID]["events"][eventID] = eventData
@@ -544,7 +544,8 @@ app.post('/editannouncement/:id/:aid', function(req,res,next) {
     "name":req.body.announcement.name,
     "description":req.body.announcement.description,
     "authorID":req.session.uid,
-    "postDate": Date()  }
+    "postDate": Date(),
+    "visible":req.body.event.visible  }
 
   clubsJSON[clubID]["announcements"][announcementID] = announcementData
 
@@ -576,7 +577,8 @@ app.get('/newevent/:id', function(req,res) {
     "postDate":"",
     "location":"",
     "time":"",
-    "type":""
+    "type":"",
+    "visible":true
   }
 
   res.render('clubs/newevent', {title: "New Event", event: eventData});
@@ -598,7 +600,8 @@ app.post('/newevent/:id', function(req,res) {
     "postDate": req.body.event.postDate,
     "location":req.body.event.location,
     "time":req.body.event.time,
-    "type":req.body.event.type
+    "type":req.body.event.type,
+    "visible":true
   }
 
   clubsJSON[clubID]["events"].push(eventData);

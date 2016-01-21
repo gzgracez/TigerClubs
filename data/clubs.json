@@ -18,7 +18,8 @@
         "name": "Announcement",
         "description": "This is an announcement",
         "authorID": 4,
-        "postDate": "Tue Jan 19 2016 15:06:42 GMT-0500 (EST)"
+        "postDate": "Tue Jan 19 2016 15:06:42 GMT-0500 (EST)",
+        "visible": true
       }
     ],
     "events": [
@@ -27,10 +28,11 @@
         "clubID": 0,
         "name": "Event",
         "description": "This is an event",
-        "authorID": 4,
+        "authorID": 0,
         "location": "218",
         "time": "2:25, Tue January 12, 2016",
-        "type": "Meeting"
+        "type": "Meeting",
+        "visible": "false"
       }
     ],
     "links": [
