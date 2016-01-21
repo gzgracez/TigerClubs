@@ -20,6 +20,15 @@
         "authorID": 0,
         "postDate": "Thu Jan 21 2016 02:06:42 GMT-0500 (EST)",
         "visible": "true"
+      },
+      {
+        "id": 1,
+        "clubID": 0,
+        "name": "Project",
+        "description": "Get the Project Done!!!",
+        "authorID": 0,
+        "postDate": "Thu Jan 21 2016 11:53:58 GMT-0500 (EST)",
+        "visible": "true"
       }
     ],
     "events": [
@@ -32,6 +41,17 @@
         "location": "218",
         "time": "2:25, Tue January 12, 2016",
         "type": "Meeting",
+        "visible": "true"
+      },
+      {
+        "id": 1,
+        "clubID": 0,
+        "name": "Project Due Date",
+        "description": "Submit project at this time",
+        "authorID": 0,
+        "location": "Wherever",
+        "time": "Thursday, January 21, 2016 11:59:59 PM",
+        "type": "Due Date",
         "visible": "true"
       }
     ],
