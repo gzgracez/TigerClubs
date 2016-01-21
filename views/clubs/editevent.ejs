@@ -17,7 +17,28 @@
   <input type="text" name="event[location]" value="<%= event.location %>" placeholder="Location" class="form-control" required><br>
 
   <label for="time">Time</label>
-  <input type="text" name="event[time]" value="<%= event.time %>" placeholder="time" class="form-control" required><br>
+  <select name="event[time].month" value="<%= event.time.month %>" class="form-control" required>
+    <option value="0">January</option>
+    <option value="1">February</option>
+    <option value="2">March</option>
+    <option value="3">April</option>
+    <option value="4">May</option>
+    <option value="0">June</option>
+    <option value="0">July</option>
+    <option value="0">August</option>
+    <option value="0">September</option>
+    <option value="0">October</option>
+    <option value="0">November</option>
+    <option value="0">December</option>
+  </select>
+  
+  <select name="event[time].day" value="<%= event.time.day %>" class="form-control" required>
+
+  </select>
+  <input type="text" name="event[time].hour" value="<%= event.time.hour %>" placeholder="hour" class="form-control" required>
+  <input type="text" name="event[time].minute" value="<%= event.time.minute %>" placeholder="minute" class="form-control" required>
+
+  <br>
 
   <label for="type">Type</label>
   <input type="text" name="event[type]" value="<%= event.type %>" placeholder="type" class="form-control" required><br>
@@ -32,4 +53,7 @@
   <input class="btn btn-primary" class="form-control" type="submit" value="Update"><br><br>
 </form>
 
+<script>
+
+</script>
 <% include ../footer %>
