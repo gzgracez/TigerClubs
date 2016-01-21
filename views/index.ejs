@@ -28,12 +28,12 @@
     <h2>Welcome, <%= session.user.firstName %> <%= session.user.lastName %>!</h2>
     <p>Click <a href="/allusers">here</a> to view all users.</p>
     <p>Click <a href="/dashboard">here</a> to view your dashboard.</p>
+    <p>Click <a href="/createclub">here</a> to create a new club.</p>
 
   <% } else if (session.user.userType == "advisor") { %>
     <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
     <p>Click <a href="/dashboard">here</a> to view your dashboard.</p>
     <!-- <p>Click <a href="/allusers">here</a> to view all users.</p> -->
-
   <% } else { %>
     <h2>Welcome, <%= session.user.firstName%> <%= session.user.lastName%>!</h2>
     <p>Click <a href="/dashboard">here</a> to view your dashboard.</p>

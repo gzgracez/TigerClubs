@@ -1,0 +1,22 @@
+<% include ../header %>
+  
+<% if(messages.notification){ %>
+  <div class="alert alert-danger" id="placeholderWarning" role="alert">
+    <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+  </div>
+<% } %>
+
+ <form method="post" action="/createclub">
+    <label for="clubName">Club Name:</label>
+  <input type="text" name="club[clubname]" value="" placeholder="Club Name" class="form-control" required><br>
+
+  <label for="clubDescription">Club description:</label>
+  <input type="text" name="club[description]" value="" placeholder="Description" class="form-control" required><br>
+
+  <label for="clubLeaders">Club Leaders:</label>
+  <input type="text" name="club[description]" value="" placeholder="Club Leaders" class="form-control" required><br>
+
+  <input class="btn btn-primary" class="form-control" type="submit" value="Create Club"><br><br>
+</form>
+
+<% include ../footer %>

@@ -56,6 +56,20 @@ app.get('/dashboard', function (req, res) {
     res.render('notLoggedIn', {title: 'My Dashboard'});
 });
 
+app.get('/createclub', function (req, res) {
+  if (!req.session.user) {
+    res.render('notLoggedInAdmin', {title: 'Create a Club'});
+  }
+  else if (req.session.user.userType == "admin") {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    res.render('clubs/createclub', {title: 'Create a Club', users: userJSON});
+  }
+  else {
+    res.render('notLoggedInAdmin', {title: 'Create a Club'});
+  }
+});
+
 app.get('/myaccount', function (req, res) {
   if (req.session.user)
     res.render('account/myaccount', {title: 'My Account'});
