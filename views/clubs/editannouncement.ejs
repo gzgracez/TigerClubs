@@ -13,6 +13,10 @@
   <label for="description">Description:</label>
   <input type="text" name="announcement[description]" value="<%= announcement.description %>" placeholder="Description" class="form-control" required><br>
 
+  <label for="visible">Visible</label>
+  <input type="radio" name="announcement[visible]" value="true"  class="form-control" checked>Yes<br>
+  <input type="radio" name="announcement[visible]" value="false" class="form-control">No<br>
+
   <input class="btn btn-primary" class="form-control" type="submit" value="Update"><br><br>
 </form>
 

@@ -545,7 +545,7 @@ app.post('/editannouncement/:id/:aid', function(req,res,next) {
     "description":req.body.announcement.description,
     "authorID":req.session.uid,
     "postDate": Date(),
-    "visible":req.body.event.visible  }
+    "visible":req.body.announcement.visible  }
 
   clubsJSON[clubID]["announcements"][announcementID] = announcementData
 

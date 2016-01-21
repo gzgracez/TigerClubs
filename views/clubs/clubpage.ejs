@@ -37,6 +37,7 @@
 </thead>
 <tbody>
   <% for(var i = 0; i < club["events"].length; i++) {%>
+  <%if(club["events"][i]["visible"] == "true" || isLeader) {%>
     <tr>
         <td>
           <%= club["events"][i]["name"] %>
@@ -61,9 +62,8 @@
             <td>Hidden</td>
           <%}%>
         <%}%>
-</td>
     </tr>
-  <% } %>
+  <% }} %>
 </tbody>
 </table>
 <%if(isLeader) {%>
@@ -80,6 +80,7 @@
   </thead>
   <tbody>
     <% for(var i = 0; i < club["announcements"].length; i++) {%>
+    <%if(club["announcements"][i]["visible"] == "true" || isLeader) {%>
       <tr>
           <td>
             <%= club["announcements"][i]["name"] %>
@@ -102,7 +103,7 @@
           <%}%>
           <%}%>
       </tr>
-    <% } %>
+    <% }} %>
   </tbody>
   </table>
 <%if(isLeader) {%>
