@@ -488,6 +488,14 @@ app.get('/editevent/:id/:eid', function(req,res,next) {
   }
 
   var eventData = clubData["events"][eventID];
+  date = eventData["time"];
+  eventData["time"] = {
+    "month":date.getMonth(),
+    "year":date.getYear(),
+    "day":date.getDate(),
+    "hour":date.getHours(),
+    "minute":date.getMinutes()
+  }
 
   res.render('clubs/editevent', {title: eventData["title"], event: eventData});
 
@@ -507,7 +515,7 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
     "authorID":req.session.uid,
     "postDate": req.body.event.postDate,
     "location":req.body.event.location,
-    "time":req.body.event.time,
+    "time":Date(req.body.event.time.year, req.body.event.time.month, req.body.event.time.day, req.body.event.time.hour, req.body.event.time.minutes)
     "type":req.body.event.type,
     "visible":req.body.event.visible
   }
