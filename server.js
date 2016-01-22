@@ -70,6 +70,41 @@ app.get('/createclub', function (req, res) {
   }
 });
 
+app.post('/createclub', function (req, res) {
+  var i = req.session.uid;
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  var taken = false;
+  for (var j = 0; j < clubsJSON.length; j++) {
+    if (req.body.club.clubname == clubsJSON[j]["clubname"]) {
+      taken = true;
+      req.flash("notification", "Club Name already taken.");
+      res.redirect('/createclub');
+      break;
+    }
+  }
+  if (!taken) {
+    var temp = {
+      "id": clubsJSON[clubsJSON.length-1]["id"] + 1,
+      "clubname": req.body.club.clubname,
+      "description": req.body.club.description,
+      "advisorID": req.session.user.id,
+      "leaders": req.body.club.leaders,
+      "requests": [],
+      "announcements": [],
+      "events": [],
+      "links": []
+    };
+    clubsJSON.push(temp);
+    var jsonString = JSON.stringify(clubsJSON, null, 2);
+    fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "Club Created!");
+    res.redirect('/allclubs');
+  }
+});
+
 app.get('/myaccount', function (req, res) {
   if (req.session.user)
     res.render('account/myaccount', {title: 'My Account'});

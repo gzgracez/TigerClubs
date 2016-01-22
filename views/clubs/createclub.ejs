@@ -14,11 +14,11 @@
   <input type="text" name="club[description]" value="" placeholder="Description" class="form-control" required><br>
 
   <label for="clubLeaders">Club Leaders:</label>
-  <input type="text" name="club[description]" value="" placeholder="Club Leaders" class="form-control" required><br>
-
+  <br><br>
   <% for(var i = 0; i < users.length; i++) {%>
-    <input type="checkbox" name="club[leaders]" value=""><%= users[i]["firstName"] %> <%= users[i]["lastName"] %> (<%= users[i]["username"] %>)<br>
+    <input type="checkbox" class="ccheckbox" name="club[leaders][i]" value=""><%= users[i]["firstName"] %> <%= users[i]["lastName"] %> (<%= users[i]["username"] %>)<br>
   <% } %>
+  <br>
 
   <input class="btn btn-primary" class="form-control" type="submit" value="Create Club"><br><br>
 </form>
