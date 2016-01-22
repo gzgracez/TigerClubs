@@ -40,7 +40,7 @@
       if(i > 0 && i < 13) {%>
         <option value = "<%=i%>"><%=i+":00 AM"%></option>
       <%} else if(i > 13) {%>
-        <option value = "<%=i%>"><%=(i-12+":00 PM"%></option>
+        <option value = "<%=i%>"><%=(i-12)+":00 PM"%></option>
       <%} else {%>
         <option value = "<%=i%>">12:00 AM</option>
       <%} 
@@ -66,6 +66,7 @@
   <input class="btn btn-primary" class="form-control" type="submit" value="Update"><br><br>
 </form>
 
+<script src="/static/js/jquery-2.1.4.min.js"></script>
 <script>
 function changeDays(m,y) {
   var days;
@@ -87,12 +88,12 @@ function changeDays(m,y) {
 }
 
 $('[name="event[time].month"]').on('change', function() {
-  $('[name="event[time].day"]').html() = '';
+  $('[name="event[time].day"]').html('');
   d = changeDays($('[name="event[time].month"]').val(),$('[name="event[time].year"]').val())
   for(i = 1; i <= d; i++) {
     $('[name="event[time].day"]').append('<option value = '+i+'>'+i+'</option>');
   }
-  $('[name="event[time].month"]').val() = 0;
+  $('[name="event[time].day"]').val(1);
 });
 
 
@@ -100,7 +101,12 @@ d = changeDays($('[name="event[time].month"]').val(),$('[name="event[time].year"
 for(i = 1; i <= d; i++) {
   $('[name="event[time].day"]').append('<option value = '+i+'>'+i+'</option>');
 }
-$('[name="event[time].month"]').val() = 0;
+console.log(event);
 
 </script>
-<% include ../footer %>
+</div>
+</div>
+
+<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
