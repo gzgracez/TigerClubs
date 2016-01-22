@@ -515,7 +515,7 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
     "authorID":req.session.uid,
     "postDate": req.body.event.postDate,
     "location":req.body.event.location,
-    "time":Date(req.body.event.time.year, req.body.event.time.month, req.body.event.time.day, req.body.event.time.hour, req.body.event.time.minutes)
+    "time":Date(req.body.event.time.year, req.body.event.time.month, req.body.event.time.day, req.body.event.time.hour, req.body.event.time.minutes),
     "type":req.body.event.type,
     "visible":req.body.event.visible
   }

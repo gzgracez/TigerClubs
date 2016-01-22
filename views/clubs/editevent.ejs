@@ -35,9 +35,22 @@
   <select name="event[time].day" value="<%= event.time.day %>" class="form-control" required>
 
   </select>
-  <input type="text" name="event[time].hour" value="<%= event.time.hour %>" placeholder="hour" class="form-control" required>
-  <input type="text" name="event[time].minute" value="<%= event.time.minute %>" placeholder="minute" class="form-control" required>
-
+  <select name="event[time].hour" value="<%= event.time.hour %>" class="form-control" required>
+    <%for(i = 0; i < 24; i++) {
+      if(i > 0 && i < 13) {%>
+        <option value = "<%=i%>"><%=i+":00 AM"%></option>
+      <%} else if(i > 13) {%>
+        <option value = "<%=i%>"><%=(i-12+":00 PM"%></option>
+      <%} else {%>
+        <option value = "<%=i%>">12:00 AM</option>
+      <%} 
+      }%>
+  </select>
+  <select name="event[time].minute" value="<%= event.time.minute %>" class="form-control" required>
+    <%for(i = 0; i < 60; i++) {%>
+      <option value = "<%=i%>"><%=i%></option>
+    <%}%>
+  </select>
   <br>
 
   <label for="type">Type</label>
@@ -54,6 +67,40 @@
 </form>
 
 <script>
+function changeDays(m,y) {
+  var days;
+  if(m == 0 || m == 2 || m == 4 || m == 6 || m == 7 || m == 9 || m == 11) {
+    days = 31
+  }
+  else if(m == 3 || m == 5 || m == 8 || m == 10) {
+    days = 30
+  }
+  else {
+    if(y%4 == 0) {
+      days = 29
+    }
+    else {
+      days = 28
+    }
+  }
+  return days
+}
+
+$('[name="event[time].month"]').on('change', function() {
+  $('[name="event[time].day"]').html() = '';
+  d = changeDays($('[name="event[time].month"]').val(),$('[name="event[time].year"]').val())
+  for(i = 1; i <= d; i++) {
+    $('[name="event[time].day"]').append('<option value = '+i+'>'+i+'</option>');
+  }
+  $('[name="event[time].month"]').val() = 0;
+});
+
+
+d = changeDays($('[name="event[time].month"]').val(),$('[name="event[time].year"]').val())
+for(i = 1; i <= d; i++) {
+  $('[name="event[time].day"]').append('<option value = '+i+'>'+i+'</option>');
+}
+$('[name="event[time].month"]').val() = 0;
 
 </script>
 <% include ../footer %>
