@@ -16,7 +16,7 @@
   <label for="clubLeaders">Club Leaders:</label>
   <br><br>
   <% for(var i = 0; i < users.length; i++) {%>
-    <input type="checkbox" class="ccheckbox" name="club[leaders][i]" value="i"><%= users[i]["firstName"] %> <%= users[i]["lastName"] %> (<%= users[i]["username"] %>)<br>
+    <input type="checkbox" class="ccheckbox" name="club[leaders]" value="<%= users[i]["id"] %>"><%= users[i]["firstName"] %> <%= users[i]["lastName"] %> (<%= users[i]["username"] %>)<br>
   <% } %>
   <br>
 

@@ -8,6 +8,7 @@
   <p><strong>Description: </strong><%= club["description"] %></p>
   <p><strong>Advisor: </strong><%= club["advisorID"][0] %></p>
   <p><strong>Leaders: </strong>
+  <% if (club["leaders"].length > 0) { %>
     <% for(i = 0; i < club["leaders"].length; i++) {%>
       <% if (i != (club["leaders"].length - 1)) {%>
         <%=club["leaders"][i]%>,
@@ -15,7 +16,8 @@
         <%=club["leaders"][i]%>
       <%}%>
     <%}%>
-    </p>
+  <%}%>
+  </p>
   <form method="post" action="/uploadform/<%= club["id"] %>">
     <input class="button btn btn-success" class="form-control" type="filepicker" data-fp-apikey="Ax5haFujiQXm6yABGRnBtz" id="formupload" name="formupload[formurl]" placeholder="Form"onchange='$("#formupload").val(event.fpfile.url);console.log($("#formupload").val());this.form.submit();'>
     <a href="/roster/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Roster</a>

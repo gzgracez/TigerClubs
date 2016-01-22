@@ -90,13 +90,17 @@ app.post('/createclub', function (req, res) {
       "id": clubsJSON[clubsJSON.length-1]["id"] + 1,
       "clubname": req.body.club.clubname,
       "description": req.body.club.description,
-      "advisorID": req.session.user.id,
-      "leaders": [],
+      "advisorID": [req.session.user.id],
+      "leaders": req.body.club.leaders,
       "requests": [],
       "announcements": [],
       "events": [],
       "links": []
     };
+    if (!req.body.club.leaders) {
+      temp["leaders"] = [];
+    }
+    console.log(req.body.club.leaders);
     clubsJSON.push(temp);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
     fs.writeFile("data/clubs.json", jsonString);
@@ -488,11 +492,13 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     var leader = false;
 
     var leaders = [];
-    for (var i = 0; i < clubData["leaders"].length; i++) {
-      if(clubData["leaders"][i] == req.session.uid) {
-        leader = true;
+    if (clubData["leaders"].length > 0) {
+      for (var i = 0; i < clubData["leaders"].length; i++) {
+        if(clubData["leaders"][i] == req.session.uid) {
+          leader = true;
+        }
+        leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
       }
-      leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
     }
     clubData["leaders"] = leaders;
 
