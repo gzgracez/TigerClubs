@@ -34,6 +34,20 @@
       <% } %>
     <% } %>
   </form>
+  <form method="post" action="/addlink/<%= club["id"] %>">
+    <% if (session.user.userType == "admin") { %>
+      <% if (club["advisorID"] == session.user.id) { %>
+        <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" name="link[link]" class="form-control" placeholder="Link (http://...)" required>
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">Add Link</button>
+            </span>
+          </div>
+        </div>
+      <% } %>
+    <% } %>
+  </form>
 
 <table class="table table-striped table-hover">
 <thead>

@@ -54,7 +54,6 @@
         "type": "Due Date",
         "visible": "true"
       }
-      
     ],
     "links": [
       {
@@ -95,7 +94,9 @@
     "requests": [],
     "announcements": [],
     "events": [],
-    "links": []
+    "links": [
+      "http://hacktrin.com/"
+    ]
   },
   {
     "id": 3,

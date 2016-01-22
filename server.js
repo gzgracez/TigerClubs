@@ -57,6 +57,20 @@ app.get('/dashboard', function (req, res) {
     res.render('notLoggedIn', {title: 'My Dashboard'});
 });
 
+app.post('/addlink/:id',function(req,res) {
+  if (req.session.user) {
+    var clubID = parseInt(req.params.id);
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    clubsJSON[clubID]["links"].push(req.body.link.link);
+    var jsonString = JSON.stringify(clubsJSON, null, 2);
+    fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "Link added successfully");
+    res.redirect(req.session.returnTo || '/clubs');
+    delete req.session.returnTo;
+  }
+});
+
 app.get('/createclub', function (req, res) {
   if (!req.session.user) {
     res.render('notLoggedInAdmin', {title: 'Create a Club'});
