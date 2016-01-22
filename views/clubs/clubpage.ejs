@@ -6,7 +6,7 @@
   <% } %>
   
   <p><strong>Description: </strong><%= club["description"] %></p>
-  <p><strong>Advisor: </strong><%= club["Advisor"] %></p>
+  <p><strong>Advisor: </strong><%= club["advisorID"][0] %></p>
   <p><strong>Leaders: </strong>
     <% for(i = 0; i < club["leaders"].length; i++) {%>
       <% if (i != (club["leaders"].length - 1)) {%>
