@@ -1,12 +1,18 @@
 <% include ../header %>
-  <% if(messages.notification){ %>
-    <div class="alert alert-success" id="placeholderSuccess" role="alert">
-      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
-    </div>
+   <% if(messages.notification){ %>
+    <% if(messages.notification == "Club Name already taken."){ %>
+      <div class="alert alert-danger" id="placeholderWarning" role="alert">
+        <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+      </div>
+    <% } else {%>
+      <div class="alert alert-success" id="placeholderSuccess" role="alert">
+        <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+      </div>
+    <% } %>
   <% } %>
   
   <p><strong>Description: </strong><%= club["description"] %></p>
-  <p><strong>Advisor: </strong><%= club["advisorID"][0] %></p>
+  <p><strong>Advisor: </strong><%= club["advisorName"][0] %></p>
   <p><strong>Leaders: </strong>
   <% if (club["leaders"].length > 0) { %>
     <% for(i = 0; i < club["leaders"].length; i++) {%>
@@ -23,7 +29,9 @@
     <a href="/roster/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Roster</a>
     <% if (session.user.userType == "admin") { %>
       <a href="/files/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Uploaded Files</a>
-      <a href="/editclub/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">Edit Club Info</a>
+      <% if (club["advisorID"] == session.user.id) { %>
+        <a href="/editclub/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">Edit Club Info</a>
+      <% } %>
     <% } %>
   </form>
 
