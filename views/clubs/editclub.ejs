@@ -1,13 +1,13 @@
 <% include ../header %>
-  
+
 <% if(messages.notification){ %>
   <div class="alert alert-danger" id="placeholderWarning" role="alert">
     <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
   </div>
 <% } %>
 
- <form method="post" action="/createclub">
-    <label for="clubName">Club Name:</label>
+<form method="post" action="/editclub">
+  <label for="clubName">Club Name:</label>
   <input type="text" name="club[clubname]" value="" placeholder="Club Name" class="form-control" required><br>
 
   <label for="clubDescription">Club description:</label>
@@ -16,11 +16,11 @@
   <label for="clubLeaders">Club Leaders:</label>
   <br><br>
   <% for(var i = 0; i < users.length; i++) {%>
-    <input type="checkbox" class="ccheckbox" name="club[leaders][i]" value="i"><%= users[i]["firstName"] %> <%= users[i]["lastName"] %> (<%= users[i]["username"] %>)<br>
+    <input type="checkbox" class="ccheckbox" name="club[leaders][i]" value=""><%= users[i]["firstName"] %> <%= users[i]["lastName"] %> (<%= users[i]["username"] %>)<br>
   <% } %>
   <br>
 
   <input class="btn btn-primary" class="form-control" type="submit" value="Create Club"><br><br>
 </form>
-
+  
 <% include ../footer %>

@@ -91,7 +91,7 @@ app.post('/createclub', function (req, res) {
       "clubname": req.body.club.clubname,
       "description": req.body.club.description,
       "advisorID": req.session.user.id,
-      "leaders": req.body.club.leaders,
+      "leaders": [],
       "requests": [],
       "announcements": [],
       "events": [],
@@ -102,6 +102,20 @@ app.post('/createclub', function (req, res) {
     fs.writeFile("data/clubs.json", jsonString);
     req.flash("notification", "Club Created!");
     res.redirect('/allclubs');
+  }
+});
+
+app.get('/editclub/:id', function (req, res) {
+  if (!req.session.user) {
+    res.render('notLoggedInAdmin', {title: 'Edit Club'});
+  }
+  else if (req.session.user.userType == "admin") {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    res.render('clubs/createclub', {title: 'Edit Club', users: userJSON});
+  }
+  else {
+    res.render('notLoggedInAdmin', {title: 'Edit Club'});
   }
 });
 
