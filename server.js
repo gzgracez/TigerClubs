@@ -90,13 +90,14 @@ app.post('/createclub', function (req, res) {
       "id": clubsJSON[clubsJSON.length-1]["id"] + 1,
       "clubname": req.body.club.clubname,
       "description": req.body.club.description,
-      "advisorID": req.session.user.id,
-      "leaders": [],
+      "advisorID": [req.session.user.id],
+      "leaders": req.body.club.leaders,
       "requests": [],
       "announcements": [],
       "events": [],
       "links": []
     };
+    console.log(req.body.club.leaders);
     clubsJSON.push(temp);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
     fs.writeFile("data/clubs.json", jsonString);
