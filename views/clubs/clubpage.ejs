@@ -1,8 +1,14 @@
 <% include ../header %>
-  <% if(messages.notification){ %>
-    <div class="alert alert-success" id="placeholderSuccess" role="alert">
-      <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
-    </div>
+   <% if(messages.notification){ %>
+    <% if(messages.notification == "Club Name already taken."){ %>
+      <div class="alert alert-danger" id="placeholderWarning" role="alert">
+        <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+      </div>
+    <% } else {%>
+      <div class="alert alert-success" id="placeholderSuccess" role="alert">
+        <p class="nameAlert"><span><%= messages.notification %>&nbsp;</span><a href="#" class="close nameAlert" data-dismiss="alert" data-hide="alert">&times;</a></p>
+      </div>
+    <% } %>
   <% } %>
   
   <p><strong>Description: </strong><%= club["description"] %></p>

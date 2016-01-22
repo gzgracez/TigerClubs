@@ -81,12 +81,33 @@
   },
   {
     "id": 2,
-    "clubname": "test",
+    "clubname": "testEDIT",
     "description": "test",
     "advisorID": [
       0
     ],
-    "leaders": [],
+    "leaders": [
+      0,
+      2,
+      6
+    ],
+    "requests": [],
+    "announcements": [],
+    "events": [],
+    "links": []
+  },
+  {
+    "id": 3,
+    "clubname": "test2",
+    "description": "test",
+    "advisorID": [
+      0
+    ],
+    "leaders": [
+      3,
+      4,
+      5
+    ],
     "requests": [],
     "announcements": [],
     "events": [],

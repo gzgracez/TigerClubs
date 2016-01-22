@@ -92,7 +92,6 @@ app.post('/createclub', function (req, res) {
       "clubname": req.body.club.clubname,
       "description": req.body.club.description,
       "advisorID": [req.session.user.id],
-      "leaders": req.body.club.leaders,
       "requests": [],
       "announcements": [],
       "events": [],
@@ -101,7 +100,13 @@ app.post('/createclub', function (req, res) {
     if (!req.body.club.leaders) {
       temp["leaders"] = [];
     }
-    console.log(req.body.club.leaders);
+    else {
+      var tempLeaders = [];
+      for (var l = 0; l < req.body.club.leaders.length; l++) {
+        tempLeaders.push(parseInt(req.body.club.leaders[l]));
+      }
+      temp["leaders"] = tempLeaders;
+    }
     clubsJSON.push(temp);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
     fs.writeFile("data/clubs.json", jsonString);
@@ -117,13 +122,54 @@ app.get('/editclub/:id', function (req, res) {
   else if (req.session.user.userType == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
     var userJSON = JSON.parse(users);
-    res.render('clubs/editclub', {title: 'Edit Club', users: userJSON});
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    var clubID = parseInt(req.params.id);
+    res.render('clubs/editclub', {title: 'Edit Club', users: userJSON, club: clubsJSON[clubID]});
   }
   else {
     res.render('notLoggedInAdmin', {title: 'Edit Club'});
   }
 });
 
+app.post('/editclub/:id', function (req, res) {
+  var users = fs.readFileSync('data/users.json', 'utf8');
+  var userJSON = JSON.parse(users);
+  var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+  var clubsJSON = JSON.parse(clubs);
+  var clubID = parseInt(req.params.id);
+  var taken = false;
+  for (var j = 0; j < clubsJSON.length; j++) {
+    if (req.body.club.clubname == clubsJSON[j]["clubname"]) {
+      if (!(clubsJSON[j]["clubname"] == clubsJSON[clubID]["clubname"])) {
+        taken = true;
+        req.flash("notification", "Club Name already taken.");
+        var tempPath = "/editclub/" + clubID;
+        res.redirect(tempPath || req.session.returnTo);
+        break;
+      }
+    }
+  }
+  if (!taken) {
+    clubsJSON[clubID]["clubname"] = req.body.club.clubname;
+    clubsJSON[clubID]["description"] = req.body.club.description;
+    if (!req.body.club.leaders) {
+      temp["leaders"] = [];
+    }
+    else {
+      var tempLeaders = [];
+      for (var l = 0; l < req.body.club.leaders.length; l++) {
+        tempLeaders.push(parseInt(req.body.club.leaders[l]));
+      }
+      clubsJSON[clubID]["leaders"] = tempLeaders;
+    }
+    var jsonString = JSON.stringify(clubsJSON, null, 2);
+    fs.writeFile("data/clubs.json", jsonString);
+    req.flash("notification", "Club Edited!");
+    res.redirect(req.session.returnTo || '/allclubs');
+    delete req.session.returnTo;
+  }
+});
 app.get('/myaccount', function (req, res) {
   if (req.session.user)
     res.render('account/myaccount', {title: 'My Account'});
