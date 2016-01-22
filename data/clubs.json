@@ -95,7 +95,12 @@
     "announcements": [],
     "events": [],
     "links": [
-      "http://hacktrin.com/"
+      {
+        "link": "https://docs.google.com/spreadsheets/d/1HVVQ07qFzgdzbMQr1VGVVZyNMSyCnSpFQk_DsG_2gCc/edit",
+        "userID": 0,
+        "fullname": "Ad Min1",
+        "email": "student@email.com"
+      }
     ]
   },
   {

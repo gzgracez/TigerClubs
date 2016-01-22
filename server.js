@@ -62,7 +62,13 @@ app.post('/addlink/:id',function(req,res) {
     var clubID = parseInt(req.params.id);
     var clubs = fs.readFileSync('data/clubs.json', 'utf8');
     var clubsJSON = JSON.parse(clubs);
-    clubsJSON[clubID]["links"].push(req.body.link.link);
+    var tempLink = {
+        "link": req.body.link.link,
+        "userID": req.session.user.id,
+        "fullname": req.session.user.firstName + " " + req.session.user.lastName,
+        "email": req.session.user.email
+      }
+    clubsJSON[clubID]["links"].push(tempLink);
     var jsonString = JSON.stringify(clubsJSON, null, 2);
     fs.writeFile("data/clubs.json", jsonString);
     req.flash("notification", "Link added successfully");
