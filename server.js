@@ -495,6 +495,12 @@ app.get('/clubpage/:id', function(req,res) {//1st route
       leaders.push(userJSON[clubData["leaders"][i]]["firstName"]+" "+userJSON[clubData["leaders"][i]]["lastName"]);
     }
     clubData["leaders"] = leaders;
+
+    var advisor = [];
+    
+    advisor.push(userJSON[clubData["advisorID"][0]]["firstName"]+" "+userJSON[clubData["advisorID"][0]]["lastName"]);
+    
+    clubData["advisorID"] = advisor;
     
     for(var i = 0; i < clubData["announcements"].length; i++) {
       var a = userJSON[clubData["announcements"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["announcements"][i]["authorID"]]["lastName"];
