@@ -589,7 +589,7 @@ app.get('/editevent/:id/:eid', function(req,res,next) {
   var eventID = parseInt(req.params.eid);
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
-  console.log(clubID);
+  
   var clubData = clubsJSON[clubID];
 
   for(var i = 0; i < clubData["events"].length; i++) {
@@ -598,15 +598,15 @@ app.get('/editevent/:id/:eid', function(req,res,next) {
   }
 
   var eventData = clubData["events"][eventID];
-  date = eventData["time"];
-  eventData["time"] = {
-    "month":date.getMonth(),
-    "year":date.getYear(),
-    "day":date.getDate(),
-    "hour":date.getHours(),
-    "minute":date.getMinutes()
-  }
+  date = new Date(eventData["time"]);
 
+  eventData["month"]=date.getMonth();
+  eventData["year"]=date.getFullYear();
+  eventData["day"]=date.getDate();
+  eventData["hour"]=date.getHours();
+  eventData["minute"]=date.getMinutes();
+ 
+ 
   res.render('clubs/editevent', {title: eventData["title"], event: eventData});
 
 });
@@ -616,7 +616,7 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
   var eventID = parseInt(req.params.eid);
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
-  
+  date = new Date(2016, parseInt(req.body.event.month), parseInt(req.body.event.day), parseInt(req.body.event.hour), parseInt(req.body.event.minute));
   var eventData = {
     "id":eventID,
     "clubID":clubID,
@@ -625,7 +625,7 @@ app.post('/editevent/:id/:eid', function(req,res,next) {
     "authorID":req.session.uid,
     "postDate": req.body.event.postDate,
     "location":req.body.event.location,
-    "time":Date(req.body.event.time.year, req.body.event.time.month, req.body.event.time.day, req.body.event.time.hour, req.body.event.time.minutes),
+    "time":date.toString(),
     "type":req.body.event.type,
     "visible":req.body.event.visible
   }
@@ -708,7 +708,10 @@ app.get('/newevent/:id', function(req,res) {
     "authorID":req.session.uid,
     "postDate":"",
     "location":"",
-    "time":"",
+    "month":1,
+    "day":1,
+    "hour":1,
+    "minute":1,
     "type":"",
     "visible":"true"
   }
@@ -721,8 +724,7 @@ app.post('/newevent/:id', function(req,res) {
   var clubID = parseInt(req.params.id);
   var clubs = fs.readFileSync('data/clubs.json', 'utf8');
   var clubsJSON = JSON.parse(clubs);
-  
-
+  date = new Date(2016, parseInt(req.body.event.month), parseInt(req.body.event.day), parseInt(req.body.event.hour), parseInt(req.body.event.minute));
   var eventData = {
     "id":clubsJSON[clubID]["events"].length,
     "clubID":clubID,
@@ -731,7 +733,7 @@ app.post('/newevent/:id', function(req,res) {
     "authorID":req.session.uid,
     "postDate": req.body.event.postDate,
     "location":req.body.event.location,
-    "time":req.body.event.time,
+    "time":date.toString(),
     "type":req.body.event.type,
     "visible":"true"
   }

@@ -6,7 +6,7 @@
   </div>
 <% } %>
 
-<form method="post" action=<%="/editevent/"+event.clubID+"/"+event.id%>>
+<form id = "form" method="post" action=<%="/editevent/"+event.clubID+"/"+event.id%>>
   <label for="title">Title:</label>
   <input type="text" name="event[name]" value="<%= event.name %>" placeholder="Title" class="form-control" required><br>
 
@@ -16,58 +16,67 @@
   <label for="location">Location:</label>
   <input type="text" name="event[location]" value="<%= event.location %>" placeholder="Location" class="form-control" required><br>
 
+  <label for="type">Type</label>
+  <input type="text" name="event[type]" value="<%= event.type %>" placeholder="type" class="form-control" required><br>
+
   <label for="time">Time</label>
-  <select name="event[time].month" value="<%= event.time.month %>" class="form-control" required>
-    <option value="0">January</option>
-    <option value="1">February</option>
-    <option value="2">March</option>
-    <option value="3">April</option>
-    <option value="4">May</option>
-    <option value="0">June</option>
-    <option value="0">July</option>
-    <option value="0">August</option>
-    <option value="0">September</option>
-    <option value="0">October</option>
-    <option value="0">November</option>
-    <option value="0">December</option>
+  <select form = "form" name="event[month]" value="<%= event.month %>" class="form-control" required>
+    <option value="0" <%if(event.month == 0) {%>selected<%}%>>January</option>
+    <option value="1"<%if(event.month == 1) {%>selected<%}%>>February</option>
+    <option value="2"<%if(event.month == 2) {%>selected<%}%>>March</option>
+    <option value="3"<%if(event.month == 3) {%>selected<%}%>>April</option>
+    <option value="4"<%if(event.month == 4) {%>selected<%}%>>May</option>
+    <option value="5"<%if(event.month == 5) {%>selected<%}%>>June</option>
+    <option value="6"<%if(event.month == 6) {%>selected<%}%>>July</option>
+    <option value="7"<%if(event.month == 7) {%>selected<%}%>>August</option>
+    <option value="8"<%if(event.month == 8) {%>selected<%}%>>September</option>
+    <option value="9"<%if(event.month == 9) {%>selected<%}%>>October</option>
+    <option value="10"<%if(event.month == 10) {%>selected<%}%>>November</option>
+    <option value="11"<%if(event.month == 11) {%>selected<%}%>>December</option>
   </select>
   
-  <select name="event[time].day" value="<%= event.time.day %>" class="form-control" required>
+  <select form = "form" name="event[day]" class="form-control" required>
+
+  
 
   </select>
-  <select name="event[time].hour" value="<%= event.time.hour %>" class="form-control" required>
+  <div id = "initialDate"><%=event.day%></div>
+  <select form = "form" name="event[hour]" class="form-control" required>
     <%for(i = 0; i < 24; i++) {
-      if(i > 0 && i < 13) {%>
-        <option value = "<%=i%>"><%=i+":00 AM"%></option>
-      <%} else if(i > 13) {%>
-        <option value = "<%=i%>"><%=(i-12)+":00 PM"%></option>
-      <%} else {%>
-        <option value = "<%=i%>">12:00 AM</option>
-      <%} 
+      if(i > 0 && i < 12) {%>
+        <option value = "<%=i%>" <%if(event.hour == i) {%>selected<%}%>><%=i+":00 AM"%></option>
+      <%} else if(i > 12) {%>
+        <option value = "<%=i%>" <%if(event.hour == i) {%>selected<%}%>><%=(i-12)+":00 PM"%></option>
+      <%} else if(i == 0) {%>
+        <option value = "<%=i%>" <%if(event.hour == i) {%>selected<%}%>>12:00 AM</option>
+      <%} else{%>
+        <option value = "<%=i%>" <%if(event.hour == i) {%>selected<%}%>>12:00 PM</option>
+      <%}
       }%>
   </select>
-  <select name="event[time].minute" value="<%= event.time.minute %>" class="form-control" required>
+  <select form = "form" name="event[minute]" class="form-control" required>
     <%for(i = 0; i < 60; i++) {%>
-      <option value = "<%=i%>"><%=i%></option>
+      <option value ="<%=i%>" <%if(event.minute == i) {%>selected<%}%>><%="and "+i+" minutes"%></option>
     <%}%>
   </select>
   <br>
-
-  <label for="type">Type</label>
-  <input type="text" name="event[type]" value="<%= event.type %>" placeholder="type" class="form-control" required><br>
 
   <label for="visible">Visible</label>
   <input type="radio" name="event[visible]" value="true"  class="form-control" checked>Yes<br>
   <input type="radio" name="event[visible]" value="false" class="form-control">No<br>
 
-
   
-
+  
   <input class="btn btn-primary" class="form-control" type="submit" value="Update"><br><br>
 </form>
 
+
+
 <script src="/static/js/jquery-2.1.4.min.js"></script>
+
 <script>
+iDay = $("#initialDate").text();
+$("#initialDate").hide();
 function changeDays(m,y) {
   var days;
   if(m == 0 || m == 2 || m == 4 || m == 6 || m == 7 || m == 9 || m == 11) {
@@ -87,22 +96,26 @@ function changeDays(m,y) {
   return days
 }
 
-$('[name="event[time].month"]').on('change', function() {
-  $('[name="event[time].day"]').html('');
-  d = changeDays($('[name="event[time].month"]').val(),$('[name="event[time].year"]').val())
+$('[name="event[month]"]').on('change', function() {
+  $('[name="event[day]"]').html('');
+  d = changeDays($('[name="event[month]"]').val(),$('[name="event.year"]').val())
   for(i = 1; i <= d; i++) {
-    $('[name="event[time].day"]').append('<option value = '+i+'>'+i+'</option>');
+    $('[name="event[day]"]').append('<option value = '+i+'>'+i+'</option>');
   }
-  $('[name="event[time].day"]').val(1);
 });
 
 
-d = changeDays($('[name="event[time].month"]').val(),$('[name="event[time].year"]').val())
+d = changeDays($('[name="event[month]"]').val(),$('[name="event.year"]').val())
 for(i = 1; i <= d; i++) {
-  $('[name="event[time].day"]').append('<option value = '+i+'>'+i+'</option>');
+  $('[name="event[day]"]').append('<option value = "'+i+'">'+i+'</option>');
 }
-console.log(event);
-
+$('[name="event[day]"]').val(iDay);
+/*
+$('[name="event[time].month"]').val(event.time.month);
+$('[name="event[time].day"]').val(event.time.day);
+$('[name="event[time].hour"]').val(event.time.hour);
+$('[name="event[time].minute"]').val(event.time.minute);
+*/
 </script>
 </div>
 </div>
