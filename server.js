@@ -508,7 +508,8 @@ app.get('/clubpage/:id', function(req,res) {//1st route
     
     advisor.push(userJSON[clubData["advisorID"][0]]["firstName"]+" "+userJSON[clubData["advisorID"][0]]["lastName"]);
     
-    clubData["advisorID"] = advisor;
+    clubData["advisorName"] = advisor;
+    clubData["advisorID"] = clubData["advisorID"][0];
     
     for(var i = 0; i < clubData["announcements"].length; i++) {
       var a = userJSON[clubData["announcements"][i]["authorID"]]["firstName"]+" "+userJSON[clubData["announcements"][i]["authorID"]]["lastName"];
