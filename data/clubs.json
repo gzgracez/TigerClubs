@@ -58,6 +58,7 @@
     "links": [
       {
         "link": "https://cdn.filestackcontent.com/acWmil4LRmbda35SQugo",
+        "name": "Upload",
         "userID": 0,
         "fullname": "Ad Min1",
         "email": "student@email.com"
@@ -97,6 +98,14 @@
     "links": [
       {
         "link": "https://docs.google.com/spreadsheets/d/1HVVQ07qFzgdzbMQr1VGVVZyNMSyCnSpFQk_DsG_2gCc/edit",
+        "name": "Link",
+        "userID": 0,
+        "fullname": "Ad Min1",
+        "email": "student@email.com"
+      },
+      {
+        "link": "https://docs.google.com/spreadsheets/d/1YOQseA-yDaJA1zcOHMh-Xa2wn3TZCBrS5ioaUiOMnsU/edit#gid=0",
+        "name": "Link",
         "userID": 0,
         "fullname": "Ad Min1",
         "email": "student@email.com"

@@ -23,7 +23,7 @@
               <td>
                 
                 <form method="post" action="/deletefile/<%= club["id"] %>/<%= i %>">
-                  <label class="clubmember"><a href="<%= club["links"][i]["link"] %>" target="_blank">View Upload</a>&nbsp;</label>
+                  <label class="clubmember"><a href="<%= club["links"][i]["link"] %>" target="_blank">View <%= club["links"][i]["name"] %></a>&nbsp;</label>
                   <input class="btn btn-primary" class="form-control" type="submit" value="Delete">
                 </form>
               </td>

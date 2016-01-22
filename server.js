@@ -64,6 +64,7 @@ app.post('/addlink/:id',function(req,res) {
     var clubsJSON = JSON.parse(clubs);
     var tempLink = {
         "link": req.body.link.link,
+        "name": "Link",
         "userID": req.session.user.id,
         "fullname": req.session.user.firstName + " " + req.session.user.lastName,
         "email": req.session.user.email
@@ -442,6 +443,7 @@ app.post('/uploadform/:id',function(req,res) {
     var clubsJSON = JSON.parse(clubs);
     var tempLink = {
       "link": req.body.formupload.formurl,
+      "name": "Upload",
       "userID": i,
       "fullname": userJSON[i].firstName + " " + userJSON[i].lastName,
       "email": userJSON[i].email
