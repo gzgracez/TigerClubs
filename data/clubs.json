@@ -78,5 +78,18 @@
     "announcements": [],
     "events": [],
     "links": []
+  },
+  {
+    "id": 2,
+    "clubname": "test",
+    "description": "test",
+    "advisorID": [
+      0
+    ],
+    "leaders": [],
+    "requests": [],
+    "announcements": [],
+    "events": [],
+    "links": []
   }
 ]

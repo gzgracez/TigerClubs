@@ -44,6 +44,7 @@ app.get('/dashboard', function (req, res) {
     for (var i = 0; i < clubsJSON.length; i++) {
       var temp = {
         "id": clubsJSON[i]["id"],
+        "advisorID": clubsJSON[i]["advisorID"],
         "clubname": clubsJSON[i]["clubname"],
         "description": clubsJSON[i]["description"]
       };
@@ -116,7 +117,7 @@ app.get('/editclub/:id', function (req, res) {
   else if (req.session.user.userType == "admin") {
     var users = fs.readFileSync('data/users.json', 'utf8');
     var userJSON = JSON.parse(users);
-    res.render('clubs/createclub', {title: 'Edit Club', users: userJSON});
+    res.render('clubs/editclub', {title: 'Edit Club', users: userJSON});
   }
   else {
     res.render('notLoggedInAdmin', {title: 'Edit Club'});
@@ -325,6 +326,7 @@ app.get('/clubs',function(req,res) {
     for (var i = 0; i < clubsJSON.length; i++) {
       var temp = {
         "id": clubsJSON[i]["id"],
+        "advisorID": clubsJSON[i]["advisorID"],
         "clubname": clubsJSON[i]["clubname"],
         "description": clubsJSON[i]["description"]
       };

@@ -23,6 +23,7 @@
     <a href="/roster/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Roster</a>
     <% if (session.user.userType == "admin") { %>
       <a href="/files/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">View Uploaded Files</a>
+      <a href="/editclub/<%= club["id"] %>" id="roster" class="btn btn-primary rosterbtn" role="button">Edit Club Info</a>
     <% } %>
   </form>
 
