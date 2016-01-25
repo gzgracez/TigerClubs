@@ -57,6 +57,67 @@ app.get('/dashboard', function (req, res) {
     res.render('notLoggedIn', {title: 'My Dashboard'});
 });
 
+app.get('/schedule',function(req,res) {
+  if (req.session.user){
+        
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    var userJSON = JSON.parse(users);
+    var userID = parseInt(req.session.uid);
+    var userClubs = [];
+    
+    for (var i = 0; i < userJSON[userID]["clubs_member"].length; i++) {
+      userClubs.push(userJSON[userID]["clubs_member"][i]);
+    }
+    
+    for (var o = 0; o < userJSON[userID]["clubs_leader"].length; o++) {
+      userClubs.push(userJSON[userID]["clubs_leader"][o]);
+    }
+    
+    console.log(userClubs);
+        
+    var clubID = null;
+    var clubs = fs.readFileSync('data/clubs.json', 'utf8');
+    var clubsJSON = JSON.parse(clubs);
+    
+    var userClubEvents = [];
+        
+     for (var x = 0; x < userClubs.length; x++){
+         clubID = userClubs[x];
+         
+            for (var v = 0; v < clubsJSON[clubID]["events"].length; v++) {
+            userClubEvents.push(clubsJSON[clubID]["events"][v]);
+            }
+     }
+      
+    console.log(userClubEvents);
+    
+    var eventstring = JSON.stringify(userClubEvents, null, 4);
+        fs.writeFile('./data/sessionuserevents.json', eventstring);
+        
+    res.render('schedule', { title: 'Your Schedule'});
+    }
+  else
+    res.render('notLoggedIn', {title: 'Schedule'});
+    
+});
+
+app.get('/scheduleevents', function(req, res) {
+  var sessionevents = require('./data/sessionuserevents.json');
+  res.send(sessionevents);
+  console.log("Events Sent!");
+});
+
+app.get('/users',function(req,res) {
+  if (req.session.user["userType"] == "admin") {
+    var users = fs.readFileSync('data/users.json', 'utf8');
+    JSON.parse(users);
+    res.send(users);
+  }
+  else {
+    res.render('notLoggedInAdmin', {title: 'All Users'});
+  }
+});
+
 app.post('/addlink/:id',function(req,res) {
   if (req.session.user) {
     var clubID = parseInt(req.params.id);
@@ -309,13 +370,6 @@ app.get('/logout',function(req,res) {
   // req.session.destroy();
   req.flash("notification", "Successfully Logged Out!");
   res.redirect('/');
-});
-
-app.get('/schedule',function(req,res) {
-  if (req.session.user)
-    res.render('schedule', {title: 'Schedule'});
-  else
-    res.render('notLoggedIn', {title: 'Schedule'});
 });
 
 app.get('/users',function(req,res) {

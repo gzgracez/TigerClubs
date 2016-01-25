@@ -1,0 +1,24 @@
+[
+    {
+        "id": 0,
+        "clubID": 0,
+        "name": "Event",
+        "description": "This is an event",
+        "authorID": 0,
+        "location": "218",
+        "time": "Thu Jan 21 2016 16:55:00 GMT-0500 (EST)",
+        "type": "Meeting",
+        "visible": "true"
+    },
+    {
+        "id": 1,
+        "clubID": 0,
+        "name": "Project Due Date",
+        "description": "Submit project at this time",
+        "authorID": 0,
+        "location": "Wherever",
+        "time": "Thursday, January 21, 2016 11:59:59 PM",
+        "type": "Due Date",
+        "visible": "true"
+    }
+]
