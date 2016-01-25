@@ -104,6 +104,7 @@ app.get('/schedule',function(req,res) {
 app.get('/scheduleevents', function(req, res) {
   var sessionevents = require('./data/sessionuserevents.json');
   res.send(sessionevents);
+  console.log(sessionevents);
   console.log("Events Sent!");
 });
 

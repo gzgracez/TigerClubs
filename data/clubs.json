@@ -18,7 +18,7 @@
         "name": "Announcement",
         "description": "This is an announcement",
         "authorID": 0,
-        "postDate": "Thu Jan 21 2016 02:06:42 GMT-0500 (EST)",
+        "postDate": "Thursday, January 21, 2016 11:59:59 PM",
         "visible": "true"
       },
       {
@@ -27,7 +27,7 @@
         "name": "Project",
         "description": "Get the Project Done!!!",
         "authorID": 0,
-        "postDate": "Thu Jan 21 2016 11:53:58 GMT-0500 (EST)",
+        "postDate": "Friday, January 22, 2016 11:59:59 PM",
         "visible": "true"
       }
     ],
@@ -39,7 +39,7 @@
         "description": "This is an event",
         "authorID": 0,
         "location": "218",
-        "time": "Thu Jan 21 2016 16:55:00 GMT-0500 (EST)",
+        "time": "Thursday, January 21, 2016 11:59:59 PM",
         "type": "Meeting",
         "visible": "true"
       },

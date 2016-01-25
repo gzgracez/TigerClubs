@@ -33,12 +33,7 @@
                 dataType: "JSON",
                 success: function(data) {
                     event_array=data;
-                },error: function (err) {
-                    alert('Error in fetching data');
-                }
-        });
-        
-        console.log(event_array);
+                    console.log(event_array);
             $('#calendar').fullCalendar({
                 header: {
         left: 'prev,next today',
@@ -47,8 +42,7 @@
            },
 
             editable: true,
-             
-             events: event_array
+            events: event_array
        /* events: {
         url: '/scheduleevents',
         type: 'GET',
@@ -66,6 +60,12 @@
                 
                 
             });
+                },error: function (err) {
+                    alert('Error in fetching data');
+                }
+        });
+        
+        
     });
             
                 
