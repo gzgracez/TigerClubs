@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title ? title : 'Tiger Clubs' %></title>
+  <link rel="stylesheet" href="/static/css/styles2.css">
+  <link rel="shortcut icon" href="/static/2.ico" />
+<link rel="stylesheet" href="/static/css/fullcalendar.css" />
+    
+<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
+<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+    
+    <script>
+   
+    $(document).ready(function() {
+        //$('#calendar').fullCalendar({
+            //defaultDate: '2014-09-12',
+            //editable: true,
+            //eventLimit: true, // allow "more" link when too many events
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        var event_array = [];
+        
+           $.ajax({
+                url: "/scheduleevents",
+                type: 'GET',
+                dataType: "JSON",
+                success: function(data) {
+                    event_array=data;
+                },error: function (err) {
+                    alert('Error in fetching data');
+                }
+        });
+        
+        console.log(event_array);
+            $('#calendar').fullCalendar({
+                header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			     },
+
+            editable: true,
+             
+             events: event_array
+       /* events: {
+        url: '/scheduleevents',
+        type: 'GET',
+        data: {
+            custom_param1: 'something',
+            custom_param2: 'somethingelse'
+        },
+        error: function() {
+            alert('there was an error while fetching events!');
+        },
+        color: 'yellow',   // a non-ajax option
+        textColor: 'black' // a non-ajax option
+    }*/
+
+                
+                
+            });
+    });
+            
+                
+                   
+
+                
+               
+                 
+                /*{
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1)
+                },
+                {
+                    title: 'Long Event',
+                    start: new Date(y, m, d-5),
+                    end: new Date(y, m, d-2)
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d-3, 16, 0),
+                    allDay: false
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d+4, 16, 0),
+                    allDay: false
+                },
+                {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false
+                },
+                {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false
+                },
+                {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d+1, 19, 0),
+                    end: new Date(y, m, d+1, 22, 30),
+                    allDay: false
+                },
+                {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/'
+                }*/
+                //events
+            //]
+                
+         
+
+</script>
+</head>
+<body>
+	<% include navbar %>
+		<div class="container bodyText">
+		<div class="container">
+		  <h1><%= title ? title : 'Tiger Clubs' %></h1>

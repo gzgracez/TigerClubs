@@ -24,6 +24,11 @@
     "events": [
       {
         "id": 0,
+        "title": "Event", 
+        "start": "2016-01-01 18:30:00",
+        "end": "2016-01-01 19:30:00",
+        "allDay": "false",
+        
         "clubID": 0,
         "name": "Event",
         "description": "This is an event",
